@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/films"
+        android:icon="@drawable/i_films"
+        android:title="Фильмы"/>
+    <item
+        android:id="@+id/cinemas"
+        android:icon="@drawable/i_cinemas"
+        android:title="Кинотеатры"/>
+    <item
+        android:id="@+id/tickets"
+        android:icon="@drawable/i_tickets"
+        android:title="Билеты"/>
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/i_profile"
+        android:title="Профиль"/>
+</menu>
