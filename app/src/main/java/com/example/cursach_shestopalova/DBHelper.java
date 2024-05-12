@@ -399,6 +399,49 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return cinemaList;
     }
+    public List<Movie> getMoviesByCinemaId(int cinemaId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"id", "title", "description", "genr", "director", "actors", "city", "duration", "image_id"};
+        String selection = "id IN (SELECT DISTINCT movie_id FROM screenings WHERE cinema_id = ?)";
+        String[] selectionArgs = {String.valueOf(cinemaId)};
+
+        Cursor cursor = db.query("movies", projection, selection, selectionArgs, null, null, null);
+        List<Movie> movieList = new ArrayList<>();
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int idIndex = cursor.getColumnIndex("id");
+                int titleIndex = cursor.getColumnIndex("title");
+                int descriptionIndex = cursor.getColumnIndex("description");
+                int genreIndex = cursor.getColumnIndex("genr");
+                int directorIndex = cursor.getColumnIndex("director");
+                int actorsIndex = cursor.getColumnIndex("actors");
+                int cityIndex = cursor.getColumnIndex("city");
+                int durationIndex = cursor.getColumnIndex("duration");
+                int imageIdIndex = cursor.getColumnIndex("image_id");
+
+                if (idIndex != -1 && titleIndex != -1 && descriptionIndex != -1 && genreIndex != -1 && directorIndex != -1 && actorsIndex != -1 && cityIndex != -1 && durationIndex != -1 && imageIdIndex != -1) {
+                    int id = cursor.getInt(idIndex);
+                    String title = cursor.getString(titleIndex);
+                    String description = cursor.getString(descriptionIndex);
+                    String genre = cursor.getString(genreIndex);
+                    String director = cursor.getString(directorIndex);
+                    String actors = cursor.getString(actorsIndex);
+                    String city = cursor.getString(cityIndex);
+                    int duration = cursor.getInt(durationIndex);
+                    int imageId = cursor.getInt(imageIdIndex);
+
+                    // Создание объекта Movie и добавление его в список
+                    Movie movie = new Movie(id, title, description, genre, director, actors, city, duration, imageId);
+                    movieList.add(movie);
+                }
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return movieList;
+    }
 
 
 

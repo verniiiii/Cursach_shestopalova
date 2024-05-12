@@ -1,6 +1,8 @@
 package com.example.cursach_shestopalova;
 
-public class Screening {
+import java.io.Serializable;
+
+public class Screening implements Serializable {
     private int id;
     private int cinema_id;
     private int movie_id;

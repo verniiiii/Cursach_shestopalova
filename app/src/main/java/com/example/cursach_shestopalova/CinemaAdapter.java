@@ -2,6 +2,7 @@ package com.example.cursach_shestopalova;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,6 +104,9 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
                 }
             }
         });
+
+
+
 
 
     }
