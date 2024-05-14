@@ -36,7 +36,6 @@ public class MainPage extends AppCompatActivity {
     private DBHelper dbHelper;
     private SwitchCompat mySwitch;
     List<Movie> movieList;
-    ImageView imageView;
     LinearLayout linearLayout;
 
     @Override
@@ -47,9 +46,6 @@ public class MainPage extends AppCompatActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF000000")));
 
         //установка цвета кнопки
-        ImageView imageView = findViewById(R.id.searchButton);
-        Drawable drawable = imageView.getDrawable();
-        drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN); //PorterDuff.Mode.SRC_IN - это режим смешивания, который определяет, как цвет фильтра будет взаимодействовать с исходным изображением
 
         actionBar.setTitle("Ваш текст слева");
 // Находим Bottom Navigation Bar по его ID

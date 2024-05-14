@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScreeningAdapter extends RecyclerView.Adapter<ScreeningAdapter.ScreeningViewHolder> {
+public class ScreeningAdapter_bron extends RecyclerView.Adapter<ScreeningAdapter_bron.ScreeningViewHolder> {
     private List<Screening> screenings;
     private Context context;
 
 
-    public ScreeningAdapter(List<Screening> screenings, Context context) {
+    public ScreeningAdapter_bron(List<Screening> screenings, Context context) {
         this.screenings = screenings;
         this.context = context;
     }
@@ -45,13 +44,7 @@ public class ScreeningAdapter extends RecyclerView.Adapter<ScreeningAdapter.Scre
                 int position = holder.getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
                     Screening selectedScreening = screenings.get(position);
-                    // Здесь вы можете передать объект Screening во вторую активность
-                    Intent intent = new Intent(context, ChoosingPlace.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("selectedScreening", selectedScreening);
-                    bundle.putSerializable("screenings", (ArrayList<Screening>) screenings); // добавьте эту строку
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
+
                 }
             }
         });

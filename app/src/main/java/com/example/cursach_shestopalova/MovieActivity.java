@@ -1,13 +1,12 @@
 package com.example.cursach_shestopalova;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +20,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class MovieActivity extends AppCompatActivity {
+public class MovieActivity extends AppCompatActivity{
     private int movieId;
     private Movie movie;
     private Button selectedButton; // выбранная кнопка
@@ -223,7 +222,6 @@ public class MovieActivity extends AppCompatActivity {
         button5.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.black));
         button5.setTextColor(ContextCompat.getColor(this, R.color.inactive_icon_color));
     }
-
 
 
 

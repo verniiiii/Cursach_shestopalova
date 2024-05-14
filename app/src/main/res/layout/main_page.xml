@@ -38,16 +38,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <ImageButton
-                android:id="@+id/searchButton"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:src="@drawable/i_lupa"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                app:layout_constraintStart_toEndOf="@id/find"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="Нажмите, чтобы начать поиск"
-                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
