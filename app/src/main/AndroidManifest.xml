@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Cursach_shestopalova"
         tools:targetApi="31">
         <activity
+            android:name=".Bron"
+            android:exported="false" />
+        <activity
             android:name=".ChoosingPlace"
             android:exported="false" />
         <activity

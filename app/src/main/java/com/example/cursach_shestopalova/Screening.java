@@ -47,4 +47,11 @@ public class Screening implements Serializable {
     public String getTime() {
         return time;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Screening)) return false;
+        Screening screening = (Screening) o;
+        return getId() == screening.getId();
+    }
 }

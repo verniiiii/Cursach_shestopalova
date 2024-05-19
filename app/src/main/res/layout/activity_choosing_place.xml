@@ -58,8 +58,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sessions_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:padding="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -67,7 +66,6 @@
         android:id="@+id/seat_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         app:alignmentMode="alignBounds"
         app:columnCount="10"
         app:rowCount="5">
@@ -75,6 +73,9 @@
         <!-- ваши элементы сетки здесь -->
 
     </androidx.gridlayout.widget.GridLayout>
+
+
+
 
 
     <LinearLayout

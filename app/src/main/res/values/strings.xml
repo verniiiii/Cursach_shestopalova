@@ -2,4 +2,6 @@
     <string name="app_name">Синема парк</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tickets_count">"Количество выбранных билетов: %d"</string>
+    <string name="total_price">"Сумма: %d руб."</string>
 </resources>

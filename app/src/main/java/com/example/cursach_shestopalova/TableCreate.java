@@ -29,6 +29,7 @@ public class TableCreate {
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "hall_id INTEGER NOT NULL," +
             "capacity INTEGER NOT NULL," +
+            "row_number INTEGER NOT NULL," +
             "FOREIGN KEY (hall_id) REFERENCES halls(id))";
 
     public static final String CREATE_PLACE_TABLE = "CREATE TABLE places (" +

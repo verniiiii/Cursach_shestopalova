@@ -24,7 +24,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "cinema_tickets.db";
-    private static final int DATABASE_VERSION = 28;
+    private static final int DATABASE_VERSION = 52;
     private Context mContext; // Контекст приложения
 
     public DBHelper(Context context) {
@@ -114,6 +114,24 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return userExists;
     }
+    public int getUserIdByLoginAndPassword(String login, String password, SQLiteDatabase db) {
+        // Захешируем введенный пароль
+        String hashedPassword = hashPassword(password);
+
+        Cursor cursor = db.rawQuery("SELECT id FROM users WHERE login = ? AND password = ?", new String[]{login, hashedPassword});
+        Log.d("Authorization", "SQL query: " + cursor.toString());
+        Log.d("Authorization", "Cursor count: " + cursor.getCount());
+
+        int userId = -1;
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(0);
+        }
+        cursor.close();
+        db.close();
+
+        return userId;
+    }
+
     private boolean checkPassword(String password, String hashedPassword) {
         try {
             // Вычисление MD5 хеша введенного пароля

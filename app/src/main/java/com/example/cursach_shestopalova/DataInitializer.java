@@ -65,7 +65,7 @@ public class DataInitializer {
         for (int i = 1; i <= 5; i++) {
             hallValues.put("cinema_id", 1);
             hallValues.put("hall_number", i);
-            hallValues.put("capacity", 100);
+            hallValues.put("capacity", 30);
             hallValues.put("role", "standard");
             db.insert("halls", null, hallValues);
         }
@@ -74,7 +74,7 @@ public class DataInitializer {
         for (int i = 1; i <= 7; i++) {
             hallValues.put("cinema_id", 2);
             hallValues.put("hall_number", i);
-            hallValues.put("capacity", 150);
+            hallValues.put("capacity", 100);
             if (i == 1 || i == 2) {
                 hallValues.put("role", "vip");
             } else {
@@ -87,7 +87,7 @@ public class DataInitializer {
         for (int i = 1; i <= 10; i++) {
             hallValues.put("cinema_id", 3);
             hallValues.put("hall_number", i);
-            hallValues.put("capacity", 200);
+            hallValues.put("capacity", 100);
             if (i == 1 || i == 2 || i == 3) {
                 hallValues.put("role", "premium");
             } else if (i == 4 || i == 5) {
@@ -105,9 +105,9 @@ public class DataInitializer {
 
         // Добавление рядов для первого кинотеатра
         for (int i = 1; i <= 5; i++) {
-            for (int j = 1; j <= 10; j++) {
+            for (int j = 1; j <= 5; j++) {
                 rowValues.put("hall_id", i);
-                rowValues.put("capacity", 10);
+                rowValues.put("capacity", 6);
                 rowValues.put("row_number", j);
                 db.insert("rows", null, rowValues);
             }
@@ -115,7 +115,7 @@ public class DataInitializer {
 
         // Добавление рядов для второго кинотеатра
         for (int i = 6; i <= 12; i++) {
-            for (int j = 1; j <= 15; j++) {
+            for (int j = 1; j <= 10; j++) {
                 rowValues.put("hall_id", i);
                 rowValues.put("capacity", 10);
                 rowValues.put("row_number", j);
@@ -125,7 +125,7 @@ public class DataInitializer {
 
         // Добавление рядов для третьего кинотеатра
         for (int i = 13; i <= 22; i++) {
-            for (int j = 1; j <= 20; j++) {
+            for (int j = 1; j <= 10; j++) {
                 rowValues.put("hall_id", i);
                 rowValues.put("capacity", 10);
                 rowValues.put("row_number", j);
@@ -139,8 +139,8 @@ public class DataInitializer {
         ContentValues placeValues = new ContentValues();
 
         // Добавление мест для первого кинотеатра
-        for (int i = 1; i <= 50; i++) {
-            for (int j = 1; j <= 10; j++) {
+        for (int i = 1; i <= 25; i++) {
+            for (int j = 1; j <= 6; j++) {
                 placeValues.put("row_id", i);
                 placeValues.put("place_number", j);
                 db.insert("places", null, placeValues);
@@ -148,7 +148,7 @@ public class DataInitializer {
         }
 
         // Добавление мест для второго кинотеатра
-        for (int i = 51; i <= 155; i++) {
+        for (int i = 26; i <= 95; i++) {
             for (int j = 1; j <= 10; j++) {
                 placeValues.put("row_id", i);
                 placeValues.put("place_number", j);
@@ -157,7 +157,7 @@ public class DataInitializer {
         }
 
         // Добавление мест для третьего кинотеатра
-        for (int i = 156; i <= 355; i++) {
+        for (int i = 96; i <= 196; i++) {
             for (int j = 1; j <= 10; j++) {
                 placeValues.put("row_id", i);
                 placeValues.put("place_number", j);
@@ -247,7 +247,7 @@ public class DataInitializer {
             screeningValues.put("cinema_id", 1);
             screeningValues.put("movie_id", 1);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-14");
+            screeningValues.put("date", "2024-05-19");
             screeningValues.put("time", "12:00");
             screeningValues.put("price", "500");
             db.insert("screenings", null, screeningValues);
@@ -268,7 +268,7 @@ public class DataInitializer {
             screeningValues.put("cinema_id", 2);
             screeningValues.put("movie_id", 2);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-15");
+            screeningValues.put("date", "2024-05-20");
             screeningValues.put("time", "11:00");
             screeningValues.put("price", "500");
             db.insert("screenings", null, screeningValues);
@@ -289,7 +289,7 @@ public class DataInitializer {
             screeningValues.put("cinema_id", 3);
             screeningValues.put("movie_id", 3);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-16");
+            screeningValues.put("date", "2024-05-21");
             screeningValues.put("time", "10:00");
             screeningValues.put("price", "300");
             db.insert("screenings", null, screeningValues);
@@ -305,27 +305,7 @@ public class DataInitializer {
             db.insert("screenings", null, screeningValues);
         }
 
-        // Добавление первого фильма во все три кинотеатра в один день
-        for (int i = 1; i <= 3; i++) {
-            screeningValues.put("cinema_id", i);
-            screeningValues.put("movie_id", 1);
-            screeningValues.put("hall_id", 1);
-            screeningValues.put("date", "2024-05-17");
-            screeningValues.put("time", "10:00");
-            screeningValues.put("price", "500");
-            db.insert("screenings", null, screeningValues);
-        }
 
-        // Добавление второго фильма во все три кинотеатра в один день
-        for (int i = 1; i <= 3; i++) {
-            screeningValues.put("cinema_id", i);
-            screeningValues.put("movie_id", 2);
-            screeningValues.put("hall_id", 2);
-            screeningValues.put("date", "2024-05-18");
-            screeningValues.put("time", "15:00");
-            screeningValues.put("price", "300");
-            db.insert("screenings", null, screeningValues);
-        }
     }
 
 
