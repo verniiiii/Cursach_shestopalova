@@ -59,115 +59,66 @@ public class MainPage extends AppCompatActivity {
         bottomNavigationView.setItemTextColor(colorStateList);
         actionBar.setTitle("Фильмы");
 
-
+        FragmentMovies fragmentMovies = new FragmentMovies();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragmentMovies)
+                .commit();
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId()==R.id.films){
+                if (item.getItemId() == R.id.films) {
                     Toast.makeText(MainPage.this, "Фильмы", Toast.LENGTH_SHORT).show();
                     actionBar.setTitle("Фильмы");
+
+                    // Загружаем фрагмент FragmentMovies
+                    FragmentMovies fragmentMovies = new FragmentMovies();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, fragmentMovies)
+                            .commit();
+
                     return true;
                 }
+
                 else if (item.getItemId()==R.id.cinemas){
                     Toast.makeText(MainPage.this, "Кинотеатры", Toast.LENGTH_SHORT).show();
                     actionBar.setTitle("Кинотеатры");
+
+                    FragmentCinemas fragmentCinemas = new FragmentCinemas();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, fragmentCinemas)
+                            .commit();
+
                     return true;
                 }
                 else if (item.getItemId()==R.id.tickets){
                     Toast.makeText(MainPage.this, "Билеты", Toast.LENGTH_SHORT).show();
                     actionBar.setTitle("Билеты");
+
+                    FragmentMovies fragmentMovies = new FragmentMovies();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, fragmentMovies)
+                            .commit();
+
                     return true;
                 }
                 else if (item.getItemId()==R.id.profile){
                     Toast.makeText(MainPage.this, "Профиль", Toast.LENGTH_SHORT).show();
                     actionBar.setTitle("Профиль");
+
+                    FragmentMovies fragmentMovies = new FragmentMovies();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, fragmentMovies)
+                            .commit();
+
                     return true;
                 }
                 return false;
             }
         });
-
-        dbHelper = new DBHelper(this);
-        movieList = dbHelper.getAllMovies();
-
-        recyclerView = findViewById(R.id.container_movies);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-
-        movieAdapter1 = new MovieAdapter1(movieList, MainPage.this);
-        recyclerView.setAdapter(movieAdapter1);
-
-        EditText editText = findViewById(R.id.find);
-
-
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String find_film = editText.getText().toString();
-                List<Movie> filterMovies;
-                filterMovies = filterMoviesBySubstring(movieList, find_film);
-
-
-                if (mySwitch != null && mySwitch.isChecked()) {
-                    recyclerView.setLayoutManager(new GridLayoutManager(MainPage.this, 1));
-                    movieAdapter2 = new MovieAdapter2(filterMovies, MainPage.this);
-                    recyclerView.setAdapter(movieAdapter2);
-                } else if (mySwitch != null){
-                    recyclerView.setLayoutManager(new GridLayoutManager(MainPage.this, 2));
-                    movieAdapter1 = new MovieAdapter1(filterMovies, MainPage.this);
-                    recyclerView.setAdapter(movieAdapter1);
-                }
-            }
-
-        });
-
-
-
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_bar_1, menu);
 
-        MenuItem menuItem = menu.findItem(R.id.action_switch);
-        mySwitch = (SwitchCompat) menuItem.getActionView();
-
-        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    recyclerView.setLayoutManager(new GridLayoutManager(MainPage.this, 1));
-                    movieAdapter2 = new MovieAdapter2(movieList, MainPage.this);
-                    recyclerView.setAdapter(movieAdapter2);
-                } else {
-                    recyclerView.setLayoutManager(new GridLayoutManager(MainPage.this, 2));
-                    movieAdapter1 = new MovieAdapter1(movieList, MainPage.this);
-                    recyclerView.setAdapter(movieAdapter1);
-                }
-            }
-        });
-
-        return true;
-    }
-    public List<Movie> filterMoviesBySubstring(List<Movie> movies, String substring) {
-        List<Movie> filteredMovies = new ArrayList<>();
-        for (Movie movie : movies) {
-            if (movie.getTitle().toLowerCase().contains(substring.toLowerCase())) {
-                filteredMovies.add(movie);
-            }
-        }
-        return filteredMovies;
-    }
 
 
 

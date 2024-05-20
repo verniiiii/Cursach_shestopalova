@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Base64;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.Toast;
 
 import java.nio.ByteBuffer;
@@ -24,7 +25,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "cinema_tickets.db";
-    private static final int DATABASE_VERSION = 52;
+    private static final int DATABASE_VERSION = 53;
     private Context mContext; // Контекст приложения
 
     public DBHelper(Context context) {
@@ -252,6 +253,37 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         return movieList;
+    }
+    public List<Cinema> getAllCinemas() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {"id", "name", "city", "location", "description"};
+        Cursor cursor = db.query("cinemas", projection, null, null, null, null, null);
+
+        List<Cinema> cinemasList = new ArrayList<>();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int idIndex = cursor.getColumnIndex("id");
+                int nameIndex = cursor.getColumnIndex("name");
+                int cityIndex = cursor.getColumnIndex("city");
+                int locationIndex = cursor.getColumnIndex("location");
+                int descriptionIndex = cursor.getColumnIndex("description");
+
+                if (idIndex != -1 && nameIndex != -1 && descriptionIndex != -1 && locationIndex != -1 && cityIndex != -1) {
+                    int id = cursor.getInt(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    String city = cursor.getString(cityIndex);
+                    String location = cursor.getString(locationIndex);
+                    String description = cursor.getString(descriptionIndex);
+
+                    // Создание объекта Movie и добавление его в список
+                    Cinema cinema = new Cinema(id, name, city, location, description);
+                    cinemasList.add(cinema);
+                }
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return cinemasList;
     }
     public List<Screening> getScreeningsByCinemaIdAndMovieIdAndDate(int cinemaId, int movieId, String date) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -534,8 +566,158 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return cinema;
     }
+    public String findNameCinemaById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"name"};
+        String selection = "id=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = db.query("cinemas", projection, selection, selectionArgs, null, null, null);
+        Cinema cinema = null;
+        String name="";
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int nameIndex = cursor.getColumnIndex("name");
 
 
+            if (nameIndex != -1 ) {
+                name = cursor.getString(nameIndex);
+            }
+            cursor.close();
+        }
+
+        return name;
+    }
+    public String findNameMovieById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"title"};
+        String selection = "id=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = db.query("movies", projection, selection, selectionArgs, null, null, null);
+        String title="";
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int titleIndex = cursor.getColumnIndex("title");
+
+
+            if (titleIndex != -1 ) {
+                title = cursor.getString(titleIndex);
+            }
+            cursor.close();
+        }
+
+        return title;
+    }
+    public Integer findNomerHollById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"hall_number"};
+        String selection = "id=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = db.query("halls", projection, selection, selectionArgs, null, null, null);
+        int hall_number=-1;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int hall_numberIndex = cursor.getColumnIndex("hall_number");
+
+
+            if (hall_numberIndex != -1 ) {
+                hall_number = cursor.getInt(hall_numberIndex);
+            }
+            cursor.close();
+        }
+
+        return hall_number;
+    }
+
+    public Pair<Integer, Integer> findSeatAndRowIdById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"place_number", "row_id"};
+        String selection = "id=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = db.query("places", projection, selection, selectionArgs, null, null, null);
+        int seat_number = -1;
+        int row_id = -1;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int seat_numberIndex = cursor.getColumnIndex("place_number");
+            int row_idIndex = cursor.getColumnIndex("row_id");
+
+            if (seat_numberIndex != -1) {
+                seat_number = cursor.getInt(seat_numberIndex);
+            }
+            if (row_idIndex != -1) {
+                row_id = cursor.getInt(row_idIndex);
+            }
+            cursor.close();
+        }
+
+        return new Pair<>(seat_number, row_id);
+    }
+
+    public Integer findRowById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"row_number"};
+        String selection = "id=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = db.query("rows", projection, selection, selectionArgs, null, null, null);
+        int hall_number=-1;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int hall_numberIndex = cursor.getColumnIndex("row_number");
+
+
+            if (hall_numberIndex != -1 ) {
+                hall_number = cursor.getInt(hall_numberIndex);
+            }
+            cursor.close();
+        }
+
+        return hall_number;
+    }
+
+    public Integer findHallById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"hall_number"};
+        String selection = "id=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = db.query("halls", projection, selection, selectionArgs, null, null, null);
+        int hall_number=-1;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int hall_numberIndex = cursor.getColumnIndex("hall_number");
+
+
+            if (hall_numberIndex != -1 ) {
+                hall_number = cursor.getInt(hall_numberIndex);
+            }
+            cursor.close();
+        }
+
+        return hall_number;
+    }
+    public void addTickets(int screening_id, int place_id, int user_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("screening_id", screening_id);
+        values.put("place_id", place_id);
+        values.put("user_id", user_id);
+
+
+        db.insert("tickets", null, values);
+        db.close();
+    }
 
 //    public void deleteAllUsers() { //Удалить всех пользователей из бд
 //        SQLiteDatabase db = this.getWritableDatabase();
