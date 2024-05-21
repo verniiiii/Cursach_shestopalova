@@ -254,12 +254,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return movieList;
     }
+
     public List<Cinema> getAllCinemas() {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] projection = {"id", "name", "city", "location", "description"};
         Cursor cursor = db.query("cinemas", projection, null, null, null, null, null);
 
-        List<Cinema> cinemasList = new ArrayList<>();
+        List<Cinema> cinemaList = new ArrayList<>();
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 int idIndex = cursor.getColumnIndex("id");
@@ -268,7 +269,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 int locationIndex = cursor.getColumnIndex("location");
                 int descriptionIndex = cursor.getColumnIndex("description");
 
-                if (idIndex != -1 && nameIndex != -1 && descriptionIndex != -1 && locationIndex != -1 && cityIndex != -1) {
+
+                if (idIndex != -1 && nameIndex != -1 && cityIndex != -1 && locationIndex != -1 && descriptionIndex != -1) {
                     int id = cursor.getInt(idIndex);
                     String name = cursor.getString(nameIndex);
                     String city = cursor.getString(cityIndex);
@@ -277,13 +279,47 @@ public class DBHelper extends SQLiteOpenHelper {
 
                     // Создание объекта Movie и добавление его в список
                     Cinema cinema = new Cinema(id, name, city, location, description);
-                    cinemasList.add(cinema);
+                    cinemaList.add(cinema);
                 }
             } while (cursor.moveToNext());
             cursor.close();
         }
 
-        return cinemasList;
+        return cinemaList;
+    }
+    public List<Ticket> getAllTicketsById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"id", "screening_id", "place_id", "user_id"};
+        String selection = "user_id=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = db.query("tickets", projection, selection, selectionArgs, null, null, null);
+        List<Ticket> ticket_list = new ArrayList<>();
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int idIndex = cursor.getColumnIndex("id");
+                int screening_idIndex = cursor.getColumnIndex("screening_id");
+                int place_idIndex = cursor.getColumnIndex("place_id");
+                int user_idIndex = cursor.getColumnIndex("user_id");
+
+
+                if (idIndex != -1 && screening_idIndex != -1 && place_idIndex != -1 && user_idIndex != -1) {
+                    int ticketId = cursor.getInt(idIndex);
+                    int screening_id = cursor.getInt(screening_idIndex);
+                    int place_id = cursor.getInt(place_idIndex);
+                    int user_id = cursor.getInt(user_idIndex);
+
+                    // Создание объекта Movie и добавление его в список
+                    Ticket ticket = new Ticket(ticketId, screening_id, place_id, user_id);
+                    ticket_list.add(ticket);
+                }
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return ticket_list;
     }
     public List<Screening> getScreeningsByCinemaIdAndMovieIdAndDate(int cinemaId, int movieId, String date) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -380,6 +416,42 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         return movie;
+    }
+    public Screening findScreeningById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"id", "cinema_id", "movie_id", "hall_id", "date", "time", "price"};
+        String selection = "id=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = db.query("screenings", projection, selection, selectionArgs, null, null, null);
+        Screening screening = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex("id");
+            int cinema_idIndex = cursor.getColumnIndex("cinema_id");
+            int movie_idIndex = cursor.getColumnIndex("movie_id");
+            int hall_idIndex = cursor.getColumnIndex("hall_id");
+            int dateIndex = cursor.getColumnIndex("date");
+            int timeIndex = cursor.getColumnIndex("time");
+            int priceIndex = cursor.getColumnIndex("price");
+
+            if (idIndex != -1 && cinema_idIndex != -1 && movie_idIndex != -1 && hall_idIndex != -1 && dateIndex != -1 && timeIndex != -1 && priceIndex != -1) {
+                int screeningId = cursor.getInt(idIndex);
+                int cinema_id = cursor.getInt(cinema_idIndex);
+                int movie_id = cursor.getInt(movie_idIndex);
+                int hall_id = cursor.getInt(hall_idIndex);
+                String date = cursor.getString(dateIndex);
+                String time = cursor.getString(timeIndex);
+                int price = cursor.getInt(priceIndex);
+
+
+                screening = new Screening(screeningId, cinema_id, movie_id, hall_id, price, date, time);
+            }
+            cursor.close();
+        }
+
+        return screening;
     }
     public int updateMovie(Movie movie) {
         SQLiteDatabase db = this.getWritableDatabase();

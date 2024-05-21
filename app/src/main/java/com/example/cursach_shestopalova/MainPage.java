@@ -50,7 +50,7 @@ public class MainPage extends AppCompatActivity {
                     selectedFragment = new FragmentCinemas();
                     title = "Кинотеатры";
                 } else if (item.getItemId() == R.id.tickets) {
-                    selectedFragment = new FragmentMovies(); // Замените на FragmentTickets
+                    selectedFragment = new FragmentTickets(); // Замените на FragmentTickets
                     title = "Билеты";
                 } else if (item.getItemId() == R.id.profile) {
                     selectedFragment = new FragmentMovies(); // Замените на FragmentProfile
