@@ -25,7 +25,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "cinema_tickets.db";
-    private static final int DATABASE_VERSION = 54;
+    private static final int DATABASE_VERSION = 57;
     private Context mContext; // Контекст приложения
 
     public DBHelper(Context context) {
@@ -58,6 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS movies");
         db.execSQL("DROP TABLE IF EXISTS screenings");
         db.execSQL("DROP TABLE IF EXISTS tickets");
+        db.execSQL("DROP TABLE IF EXISTS faqs");
         db.execSQL("DROP TABLE IF EXISTS faq");
         onCreate(db);
     }
@@ -259,7 +260,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public List<Faq> getAllFaq() {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] projection = {"id", "question", "answer"};
-        Cursor cursor = db.query("movies", projection, null, null, null, null, null);
+        Cursor cursor = db.query("faqs", projection, null, null, null, null, null);
 
         List<Faq> faqList = new ArrayList<>();
         if (cursor != null && cursor.moveToFirst()) {

@@ -70,7 +70,7 @@ public class TableCreate {
             "FOREIGN KEY (screening_id) REFERENCES screenings(id),"+
             "FOREIGN KEY (user_id) REFERENCES users(id),"+
             "FOREIGN KEY (place_id) REFERENCES places(id))";
-    public static final String CREATE_QUESTION_TABLE = "CREATE TABLE faq (" +
+    public static final String CREATE_QUESTION_TABLE = "CREATE TABLE faqs (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "question TEXT NOT NULL," +
             "answer TEXT NOT NULL)";
