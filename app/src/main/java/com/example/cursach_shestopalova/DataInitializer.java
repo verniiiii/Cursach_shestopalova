@@ -331,5 +331,62 @@ public class DataInitializer {
         ticketValues3.put("user_id", 3);
         db.insert("tickets", null, ticketValues3);
     }
+    public static void initializeFaqData(SQLiteDatabase db) {
+        // Вставка первого элемента FAQ
+        ContentValues faqValues1 = new ContentValues();
+        faqValues1.put("question", "Как забронировать билет?");
+        faqValues1.put("answer", "Вы можете забронировать билет, выбрав фильм и сеанс, которые вы хотите посмотреть, затем выбрав место и завершив оплату.");
+        db.insert("faq", null, faqValues1);
+
+        // Вставка второго элемента FAQ
+        ContentValues faqValues2 = new ContentValues();
+        faqValues2.put("question", "Могу ли я отменить или вернуть билет?");
+        faqValues2.put("answer", "К сожалению, мы не предоставляем отмены или возвраты билетов. Убедитесь, что вы дважды проверили свое бронирование перед тем, как завершить оплату.");
+        db.insert("faq", null, faqValues2);
+
+        // Вставка третьего элемента FAQ
+        ContentValues faqValues3 = new ContentValues();
+        faqValues3.put("question", "Как я могу получить скидку на билет?");
+        faqValues3.put("answer", "Мы предлагаем скидки для студентов, пенсионеров и инвалидов. Но вы можете получить скидку только при покупке билета онлайн.");
+        db.insert("faq", null, faqValues3);
+
+        // Вставка четвертого элемента FAQ
+        ContentValues faqValues4 = new ContentValues();
+        faqValues4.put("question", "Как я могу узнать о специальных предложениях и акциях?");
+        faqValues4.put("answer", "Вы можете подписаться на нашу рассылку или следить за нашими новостями в социальных сетях, чтобы получать информацию о специальных предложениях и акциях.");
+        db.insert("faq", null, faqValues4);
+
+        // Вставка пятого элемента FAQ
+        ContentValues faqValues5 = new ContentValues();
+        faqValues5.put("question", "Как я могу связаться с вами?");
+        faqValues5.put("answer", "Вы можете связаться с нами по телефону. Мы также имеем офисы проката в каждом из наших кинотеатров.");
+        db.insert("faq", null, faqValues5);
+
+        // Вставка шестого элемента FAQ
+        ContentValues faqValues6 = new ContentValues();
+        faqValues6.put("question", "Могу ли я привести еду и напитки в кинотеатр?");
+        faqValues6.put("answer", "К сожалению, мы не разрешаем приносить свою еду и напитки в кинотеатр. Однако мы предлагаем широкий ассортимент еды и напитков в наших кинотеатрах.");
+        db.insert("faq", null, faqValues6);
+
+
+        // Вставка седьмого элемента FAQ
+        ContentValues faqValues8 = new ContentValues();
+        faqValues8.put("question", "Могу ли я купить билет на фильм, который еще не вышел?");
+        faqValues8.put("answer", "Да, вы можете купить билет на фильм, который еще не вышел, если он уже доступен для бронирования на нашем сайте или в наших кинотеатрах.");
+        db.insert("faq", null, faqValues8);
+
+        // Вставка восьмого элемента FAQ
+        ContentValues faqValues9 = new ContentValues();
+        faqValues9.put("question", "Что делать, если я опоздал на сеанс?");
+        faqValues9.put("answer", "Мы можем разрешить вам войти в зал, если вы опоздали на сеанс.");
+        db.insert("faq", null, faqValues9);
+
+        // Вставка девятого элемента FAQ
+        ContentValues faqValues10 = new ContentValues();
+        faqValues10.put("question", "Могу ли я купить билет по телефону?");
+        faqValues10.put("answer", "К сожалению, мы не предоставляем услугу бронирования билетов по телефону. Вы можете купить билет на нашем сайте или в наших кинотеатрах.");
+        db.insert("faq", null, faqValues10);
+    }
+
 }
 

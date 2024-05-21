@@ -5,6 +5,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -53,8 +55,15 @@ public class MainPage extends AppCompatActivity {
                     selectedFragment = new FragmentTickets(); // Замените на FragmentTickets
                     title = "Билеты";
                 } else if (item.getItemId() == R.id.profile) {
-                    selectedFragment = new FragmentMovies(); // Замените на FragmentProfile
                     title = "Профиль";
+                    SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", MODE_PRIVATE);
+                    int userId = sharedPreferences.getInt("user_id", -1); // возвращаем -1, если ключ отсутствует
+                    if (userId==-1){
+                        selectedFragment = new FragmentProfile(); // Замените на FragmentProfile
+                    }
+                    else {
+                        selectedFragment = new FragmentProfile(); // Замените на FragmentProfile
+                    }
                 }
 
                 if (selectedFragment != null) {

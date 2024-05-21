@@ -70,6 +70,10 @@ public class TableCreate {
             "FOREIGN KEY (screening_id) REFERENCES screenings(id),"+
             "FOREIGN KEY (user_id) REFERENCES users(id),"+
             "FOREIGN KEY (place_id) REFERENCES places(id))";
+    public static final String CREATE_QUESTION_TABLE = "CREATE TABLE faq (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "question TEXT NOT NULL," +
+            "answer TEXT NOT NULL)";
 
     public static void createTables(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
@@ -80,5 +84,6 @@ public class TableCreate {
         db.execSQL(CREATE_MOVIE_TABLE);
         db.execSQL(CREATE_SCREENING_TABLE);
         db.execSQL(CREATE_TICKET_TABLE);
+        db.execSQL(CREATE_QUESTION_TABLE);
     }
 }

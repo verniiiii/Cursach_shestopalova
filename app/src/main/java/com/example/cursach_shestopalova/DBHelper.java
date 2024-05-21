@@ -25,7 +25,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "cinema_tickets.db";
-    private static final int DATABASE_VERSION = 53;
+    private static final int DATABASE_VERSION = 54;
     private Context mContext; // Контекст приложения
 
     public DBHelper(Context context) {
@@ -44,6 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
         DataInitializer.initializeDataMovies(db);
         DataInitializer.initializeDataScreenings(db);
         DataInitializer.initializeDataTickets(db);
+        DataInitializer.initializeFaqData(db);
     }
 
     @Override
@@ -57,6 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS movies");
         db.execSQL("DROP TABLE IF EXISTS screenings");
         db.execSQL("DROP TABLE IF EXISTS tickets");
+        db.execSQL("DROP TABLE IF EXISTS faq");
         onCreate(db);
     }
     public void addUser(String login, String username, String password) {
@@ -254,6 +256,33 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return movieList;
     }
+    public List<Faq> getAllFaq() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {"id", "question", "answer"};
+        Cursor cursor = db.query("movies", projection, null, null, null, null, null);
+
+        List<Faq> faqList = new ArrayList<>();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int idIndex = cursor.getColumnIndex("id");
+                int questionIndex = cursor.getColumnIndex("question");
+                int answerIndex = cursor.getColumnIndex("answer");
+
+                if (idIndex != -1 && questionIndex != -1 && answerIndex != -1) {
+                    int id = cursor.getInt(idIndex);
+                    String question = cursor.getString(questionIndex);
+                    String answer = cursor.getString(answerIndex);
+
+                    // Создание объекта Movie и добавление его в список
+                    Faq faq = new Faq(id, question, answer);
+                    faqList.add(faq);
+                }
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return faqList;
+    }
 
     public List<Cinema> getAllCinemas() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -416,6 +445,32 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         return movie;
+    }
+    public List<String> findUserLoginAndNameById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"login", "username"};
+        String selection = "id=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = db.query("users", projection, selection, selectionArgs, null, null, null);
+        List<String> t= new  ArrayList<>();
+        if (cursor != null && cursor.moveToFirst()) {
+            int loginIndex = cursor.getColumnIndex("login");
+            int usernameIndex = cursor.getColumnIndex("username");
+
+            if (loginIndex != -1 && usernameIndex != -1 ) {
+                String login = cursor.getString(loginIndex);
+                String username = cursor.getString(usernameIndex);
+
+
+                t.add(login);
+                t.add(username);
+            }
+            cursor.close();
+        }
+
+        return t;
     }
     public Screening findScreeningById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
