@@ -52,6 +52,7 @@ public class FragmentMovies extends Fragment {
         dbHelper = new DBHelper(getContext());
         movieList = dbHelper.getAllMovies();
 
+
         recyclerView = view.findViewById(R.id.container_movies);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
@@ -89,6 +90,7 @@ public class FragmentMovies extends Fragment {
                 }
             }
         });
+        dbHelper.close();
 
         setHasOptionsMenu(true);
 
