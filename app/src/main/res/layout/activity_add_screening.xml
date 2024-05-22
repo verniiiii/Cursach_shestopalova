@@ -77,11 +77,15 @@
                 android:layout_height="wrap_content"
                 android:text="Кинотеатр:"
                 android:textSize="18sp"/>
-
             <Spinner
                 android:id="@+id/cinema_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <Spinner
+                android:id="@+id/screening_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -98,12 +102,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Время начала:"
+                android:textSize="18sp" />
+            <EditText
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:textSize="18sp"/>
 
-            <Spinner
-                android:id="@+id/time_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+
+
 
             <TextView
                 android:layout_width="wrap_content"

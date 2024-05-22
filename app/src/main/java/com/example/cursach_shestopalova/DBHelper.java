@@ -866,6 +866,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("tickets", null, values);
         db.close();
     }
+    public void addScreening(int cinema_id, int movie_id, int hall_id, String date, String time, int price) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("cinema_id", cinema_id);
+        values.put("movie_id", movie_id);
+        values.put("hall_id", hall_id);
+        values.put("date", date);
+        values.put("time", time);
+        values.put("price", price);
+
+
+        db.insert("screenings", null, values);
+        db.close();
+    }
     public void deleteScreeningsByMovieIdAndTickets(int movieId) {
         SQLiteDatabase db = this.getWritableDatabase();
         deleteTicketsByMovieId(movieId);
@@ -954,22 +969,138 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return count;
     }
-    public List<String> getAllNumberHallsByCinema(int cinemaid) {
+    public List<Pair<Integer, String>> getAllNumberHallsByCinema(int cinemaid) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {"hall_number"};
+        String[] columns = {"id", "hall_number"};
         String selection = "cinema_id = ?";
         String[] selectionArgs = new String[]{String.valueOf(cinemaid)};
         Cursor cursor = db.query("halls", columns, selection, selectionArgs, null, null, null);
-        List<String> hallsList = new ArrayList<>();
+        List<Pair<Integer, String>> hallsList = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
-                hallsList.add(String.valueOf(cursor.getInt(0)));
+                int hallId = cursor.getInt(0);
+                String hallNumber = cursor.getString(1);
+                hallsList.add(new Pair<>(hallId, hallNumber));
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return hallsList;
     }
+
+
+
+    public List<String> getSessionStartTimesWithEndTimes(int hallId, String date) {
+        List<String> startTimesWithEndTimes = new ArrayList<>();
+
+        // Столбцы, которые нужно извлечь из таблицы screenings
+        String[] screeningProjection = {
+                "id",
+                "time",
+                "movie_id"
+        };
+
+        // Строка для выбора нужных строк из таблицы screenings, в этом случае по hall_id и date
+        String screeningSelection = "hall_id = ? AND date = ?";
+
+        // Массив аргументов для screeningSelection
+        String[] screeningSelectionArgs = {String.valueOf(hallId), date};
+
+        // Используем query() для выполнения запроса к таблице screenings
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor screeningCursor = db.query("screenings", screeningProjection, screeningSelection, screeningSelectionArgs, null, null, null);
+
+        try {
+            // Итерация по курсору screeningCursor и добавление времени начала и конца сеанса в список
+            while (screeningCursor.moveToNext()) {
+                int screeningId = screeningCursor.getInt(screeningCursor.getColumnIndexOrThrow("id"));
+                String startTime = screeningCursor.getString(screeningCursor.getColumnIndexOrThrow("time"));
+                int movieId = screeningCursor.getInt(screeningCursor.getColumnIndexOrThrow("movie_id"));
+
+                // Получаем продолжительность фильма
+                int movieDuration = getMovieDurationById(movieId);
+
+                // Добавляем 30 минут перерыва
+                movieDuration += 30;
+
+                // Форматируем время начала и конца сеанса
+                String endTime = formatTime(startTime, movieDuration);
+                String startTimeWithEndTime = startTime + " - " + endTime;
+
+                startTimesWithEndTimes.add(startTimeWithEndTime);
+            }
+        } finally {
+            // Закрываем курсор screeningCursor и базу данных
+            screeningCursor.close();
+            db.close();
+        }
+
+        return startTimesWithEndTimes;
+    }
+
+
+
+    private int getMovieDurationById(int movieId) {
+        int duration = 0;
+
+        // Столбцы, которые нужно извлечь из таблицы movies
+        String[] projection = {
+                "duration"
+        };
+
+        // Строка для выбора нужных строк из таблицы movies, в этом случае по movie_id
+        String selection = "id = ?";
+
+        // Массив аргументов для selection
+        String[] selectionArgs = { String.valueOf(movieId) };
+
+        // Используем query() для выполнения запроса к таблице movies
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query("movies", projection, selection, selectionArgs, null, null, null);
+
+        try {
+            // Перемещаемся к первой строке
+            if (cursor.moveToFirst()) {
+                // Извлекаем продолжительность фильма из курсора
+                duration = cursor.getInt(cursor.getColumnIndexOrThrow("duration"));
+            }
+        } finally {
+            // Закрываем курсор
+            cursor.close();
+        }
+
+        return duration;
+    }
+    public String formatTime(String startTime, int movieDuration) {
+        // Разбиваем время начала сеанса на часы и минуты
+        String[] startTimeParts = startTime.split(":");
+        int startHour = Integer.parseInt(startTimeParts[0]);
+        int startMinute = Integer.parseInt(startTimeParts[1]);
+
+        // Преобразуем продолжительность фильма в часы и минуты
+        int movieHour = movieDuration / 60;
+        int movieMinute = movieDuration % 60;
+
+        // Добавляем продолжительность фильма к времени начала сеанса
+        int endMinute = startMinute + movieMinute;
+        int endHour = startHour + movieHour;
+        if (endMinute >= 60) {
+            endMinute -= 60;
+            endHour++;
+        }
+        if (endHour >= 24) {
+            endHour -= 24;
+        }
+
+        // Форматируем время конца сеанса в формате "HH:mm"
+        String endTime = String.format("%02d:%02d", endHour, endMinute);
+
+        return endTime;
+    }
+
+
+
+
 
 
 
