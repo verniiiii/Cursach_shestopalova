@@ -24,10 +24,12 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
     private List<Cinema> cinemas;
     private Context context;
     private String userRole;
+    int movie_id;
 
-    public CinemaAdapter(List<Cinema> cinemas, Context context) {
+    public CinemaAdapter(List<Cinema> cinemas, Context context, int movie_id) {
         this.cinemas = cinemas;
         this.context = context;
+        this.movie_id = movie_id;
         SharedPreferences sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
         userRole = sharedPreferences.getString("user_role", "");
     }
@@ -129,6 +131,8 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
                         builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                DBHelper dbHelper = new DBHelper(context);
+                                dbHelper.deleteScreeningsByMovieIdAndCinemaId(movie_id, cinema.getId());
                                 // код для удаления фильма
                                 cinemas.remove(currentPosition);
                                 notifyItemRemoved(currentPosition);

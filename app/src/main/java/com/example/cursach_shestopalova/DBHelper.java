@@ -25,7 +25,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "cinema_tickets.db";
-    private static final int DATABASE_VERSION = 67;
+    private static final int DATABASE_VERSION = 82;
     private Context mContext; // Контекст приложения
 
     public DBHelper(Context context) {
@@ -848,12 +848,13 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public void deleteScreeningsByMovieIdAndTickets(int movieId) {
         SQLiteDatabase db = this.getWritableDatabase();
+        deleteTicketsByMovieId(movieId);
+
         // удаляем все сеансы для этого фильма
         String selection = "movie_id = ?";
         String[] selectionArgs = new String[]{String.valueOf(movieId)};
         db.delete("screenings", selection, selectionArgs);
         // удаляем все билеты на сеансы этого фильма
-        deleteTicketsByMovieId(movieId);
         db.close();
     }
 
@@ -870,15 +871,57 @@ public class DBHelper extends SQLiteOpenHelper {
             deleteTicketsByScreeningId(screeningId);
         }
         cursor.close();
-        db.close();
     }
 
-    public void deleteTicketsByScreeningId(int screeningId) {
+    public void deleteScreeningsByMovieIdAndCinemaId(int movieId, int cinemaId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // удаляем все сеансы для этого фильма в этом кинотеатре
+        deleteTicketsByMovieIdAndCinemaId(movieId, cinemaId);
+
+        String selection = "movie_id = ? AND cinema_id = ?";
+        String[] selectionArgs = new String[]{String.valueOf(movieId), String.valueOf(cinemaId)};
+        int deletedScreeningsCount = db.delete("screenings", selection, selectionArgs);
+        Log.d("DBHelper", "Deleted " + deletedScreeningsCount + " screenings");
+        // удаляем все билеты на сеансы этого фильма в этом кинотеатре
+        db.close();
+
+    }
+
+    public void deleteTicketsByMovieIdAndCinemaId(int movieId, int cinemaId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // получаем идентификаторы всех сеансов для этого фильма в этом кинотеатре
+        String[] projection = {"id"};
+        String selection = "movie_id = ? AND cinema_id = ?";
+        String[] selectionArgs = new String[]{String.valueOf(movieId), String.valueOf(cinemaId)};
+        Cursor cursor = db.query("screenings", projection, selection, selectionArgs, null, null, null);
+        int deletedTicketsCount = 0;
+        // перебираем идентификаторы сеансов и удаляем билеты на них
+        Log.d("DBHelper", "ааааааааааааааааааааа"+cursor.getCount());
+
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                int screeningId = cursor.getInt(0);
+                deletedTicketsCount += deleteTicketsByScreeningId(screeningId);
+
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        Log.d("DBHelper", "Deleted " + deletedTicketsCount + " tickets");
+        Log.d("DBHelper", "Deleted " + movieId + cinemaId + " tickets");
+
+
+    }
+
+    public int deleteTicketsByScreeningId(int screeningId) {
         SQLiteDatabase db = this.getWritableDatabase();
         String whereClause = "screening_id = ?";
         String[] whereArgs = new String[]{String.valueOf(screeningId)};
-        db.delete("tickets", whereClause, whereArgs);
-        db.close();
+        int deletedTicketsCount = db.delete("tickets", whereClause, whereArgs);
+        Log.d("DBHelper", "Deleted " + deletedTicketsCount + " tickets for screening " + screeningId);
+        return deletedTicketsCount;
     }
 
 

@@ -105,7 +105,7 @@ public class MovieActivity extends AppCompatActivity{
         screeningAdapter = new ScreeningAdapter(screenings, this);
 
         cinemas = new ArrayList<>();
-        сinemaAdapter = new CinemaAdapter(cinemas, this);
+        сinemaAdapter = new CinemaAdapter(cinemas, this, movieId);
         recyclerView.setAdapter(сinemaAdapter);
 
 // Устанавливаем LayoutManager для RecyclerView после установки адаптера
