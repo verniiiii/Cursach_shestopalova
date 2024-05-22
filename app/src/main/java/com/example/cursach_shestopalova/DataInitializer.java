@@ -6,14 +6,15 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class DataInitializer {
     public static void initializeDataUsers(SQLiteDatabase db, Context context) {
+        DBHelper dbHelper = new DBHelper(context); // создаем экземпляр класса DBHelper
+
         ContentValues adminValues = new ContentValues();
         adminValues.put("login", "admin@gmail.com");
         adminValues.put("username", "admin");
-        adminValues.put("password", "admin_password");
+        adminValues.put("password", dbHelper.hashPassword("admin_password"));
         adminValues.put("role", "admin");
         db.insert("users", null, adminValues);
 
-        DBHelper dbHelper = new DBHelper(context); // создаем экземпляр класса DBHelper
 
         ContentValues user1Values = new ContentValues();
         user1Values.put("login", "vera@gmail.com");
@@ -26,7 +27,7 @@ public class DataInitializer {
         ContentValues user2Values = new ContentValues();
         user2Values.put("login", "dima@gmail.com");
         user2Values.put("username", "Dmitriy");
-        user2Values.put("password", "12345678");
+        user2Values.put("password", dbHelper.hashPassword("12345678"));
         user2Values.put("role", "user");
         db.insert("users", null, user2Values);
 
@@ -247,7 +248,7 @@ public class DataInitializer {
             screeningValues.put("cinema_id", 1);
             screeningValues.put("movie_id", 1);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-19");
+            screeningValues.put("date", "2024-05-22");
             screeningValues.put("time", "12:00");
             screeningValues.put("price", "500");
             db.insert("screenings", null, screeningValues);
@@ -262,13 +263,56 @@ public class DataInitializer {
             screeningValues.put("price", "350");
             db.insert("screenings", null, screeningValues);
         }
+        // Добавление сеансов для второго кинотеатра
+        for (int i = 6; i <= 12; i++) {
+            screeningValues.put("cinema_id", 2);
+            screeningValues.put("movie_id", 1);
+            screeningValues.put("hall_id", i);
+            screeningValues.put("date", "2024-05-22");
+            screeningValues.put("time", "11:00");
+            screeningValues.put("price", "500");
+            db.insert("screenings", null, screeningValues);
+
+            screeningValues.put("movie_id", 3);
+            screeningValues.put("time", "14:00");
+            screeningValues.put("price", "500");
+            db.insert("screenings", null, screeningValues);
+
+            screeningValues.put("movie_id", 4);
+            screeningValues.put("time", "17:00");
+            screeningValues.put("price", "200");
+            db.insert("screenings", null, screeningValues);
+        }
+
+        // Добавление сеансов для третьего кинотеатра
+        for (int i = 13; i <= 22; i++) {
+            screeningValues.put("cinema_id", 3);
+            screeningValues.put("movie_id", 1);
+            screeningValues.put("hall_id", i);
+            screeningValues.put("date", "2024-05-22");
+            screeningValues.put("time", "10:00");
+            screeningValues.put("price", "300");
+            db.insert("screenings", null, screeningValues);
+
+            screeningValues.put("movie_id", 5);
+            screeningValues.put("time", "13:00");
+            screeningValues.put("price", "250");
+            db.insert("screenings", null, screeningValues);
+
+            screeningValues.put("movie_id", 6);
+            screeningValues.put("time", "16:00");
+            screeningValues.put("price", "300");
+            db.insert("screenings", null, screeningValues);
+        }
+
+
 
         // Добавление сеансов для второго кинотеатра
         for (int i = 6; i <= 12; i++) {
             screeningValues.put("cinema_id", 2);
             screeningValues.put("movie_id", 2);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-20");
+            screeningValues.put("date", "2024-05-23");
             screeningValues.put("time", "11:00");
             screeningValues.put("price", "500");
             db.insert("screenings", null, screeningValues);
@@ -289,7 +333,7 @@ public class DataInitializer {
             screeningValues.put("cinema_id", 3);
             screeningValues.put("movie_id", 3);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-21");
+            screeningValues.put("date", "2024-05-24");
             screeningValues.put("time", "10:00");
             screeningValues.put("price", "300");
             db.insert("screenings", null, screeningValues);

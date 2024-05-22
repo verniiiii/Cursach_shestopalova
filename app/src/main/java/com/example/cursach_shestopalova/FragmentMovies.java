@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -41,6 +43,7 @@ public class FragmentMovies extends Fragment {
 
     private DBHelper dbHelper;
     private SwitchCompat mySwitch;
+    private SwitchCompat mySwitchAdmin;
     private List<Movie> movieList;
 
     @Override
@@ -102,6 +105,9 @@ public class FragmentMovies extends Fragment {
         inflater.inflate(R.menu.action_bar_1, menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_switch);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+        String userRole = sharedPreferences.getString("user_role", ""); // возвращаем -1, если ключ отсутствует
+
         mySwitch = (SwitchCompat) menuItem.getActionView();
 
         mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

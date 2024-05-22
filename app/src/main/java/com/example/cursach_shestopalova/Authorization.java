@@ -43,6 +43,7 @@ public class Authorization extends AppCompatActivity {
                     String u = String.valueOf(userId);
                     Toast.makeText(Authorization.this, u, Toast.LENGTH_SHORT).show();
                     editor.putInt("user_id", userId); // сохраняем идентификатор пользователя
+                    editor.putString("user_role", t); // сохраняем идентификатор пользователя
                     editor.apply();
 
 
@@ -55,6 +56,8 @@ public class Authorization extends AppCompatActivity {
 
                     } else if ("admin".equals(t)) {
                         Toast.makeText(Authorization.this, "Вы зашли как админ", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Authorization.this, MainPage.class);
+                        startActivity(intent);
                     }
                 }
                 else {

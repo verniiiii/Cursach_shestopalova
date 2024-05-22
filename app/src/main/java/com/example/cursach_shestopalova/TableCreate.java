@@ -74,7 +74,12 @@ public class TableCreate {
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "question TEXT NOT NULL," +
             "answer TEXT NOT NULL)";
-
+    public static String getCreateScreeningTable() {
+        return CREATE_SCREENING_TABLE;
+    }
+    public static String getCREATE_TICKET_TABLE() {
+        return CREATE_TICKET_TABLE;
+    }
     public static void createTables(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_CINEMA_TABLE);

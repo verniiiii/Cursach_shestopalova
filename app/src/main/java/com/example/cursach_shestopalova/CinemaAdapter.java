@@ -1,12 +1,16 @@
 package com.example.cursach_shestopalova;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,15 +20,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaViewHolder> {
+
     private List<Cinema> cinemas;
     private Context context;
-
+    private String userRole;
 
     public CinemaAdapter(List<Cinema> cinemas, Context context) {
         this.cinemas = cinemas;
         this.context = context;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+        userRole = sharedPreferences.getString("user_role", "");
     }
-
 
     @NonNull
     @Override
@@ -47,6 +53,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
         holder.sessionsRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.sessionsRecyclerView.setAdapter(screeningAdapter);
 
+        // Добавляем OnClickListener для каждого элемента
         holder.cinema_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +83,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
                 }
             }
         });
+
         holder.cinema_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +98,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
                 }
             }
         });
+
         holder.cinema_description.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,12 +114,38 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
             }
         });
 
+        // Проверяем роль пользователя и делаем кнопку видимой или невидимой
+        if (userRole.equals("admin")) {
+            holder.deleteButton.setVisibility(View.VISIBLE);
+            holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int currentPosition = holder.getAdapterPosition();
+                    if (currentPosition != RecyclerView.NO_POSITION) {
+                        Cinema cinema = cinemas.get(currentPosition);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Подтверждение удаления");
+                        builder.setMessage("Действительно ли вы хотите удалить фильм из кинотеатра\"" + cinema.getName() + "\"?");
+                        builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // код для удаления фильма
+                                cinemas.remove(currentPosition);
+                                notifyItemRemoved(currentPosition);
+                                notifyItemRangeChanged(currentPosition, cinemas.size());
+                            }
+                        });
 
+                        builder.setNegativeButton("Отмена", null);
+                        builder.show();
+                    }
+                }
+            });
 
-
-
+        } else {
+            holder.deleteButton.setVisibility(View.GONE);
+        }
     }
-
 
     @Override
     public int getItemCount() {
@@ -123,6 +158,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
         public TextView cinema_location;
         public TextView cinema_description;
         public RecyclerView sessionsRecyclerView;
+        public ImageButton deleteButton;
 
         public CinemaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -131,6 +167,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
             cinema_location = itemView.findViewById(R.id.cinema_location);
             cinema_description = itemView.findViewById(R.id.cinema_description);
             sessionsRecyclerView = itemView.findViewById(R.id.sessions_recycler_view);
+            deleteButton = itemView.findViewById(R.id.admin_button);
         }
     }
 
@@ -138,6 +175,4 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
         this.cinemas = cinemas;
         notifyDataSetChanged();
     }
-
-
 }

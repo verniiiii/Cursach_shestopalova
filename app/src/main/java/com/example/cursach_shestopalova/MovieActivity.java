@@ -1,16 +1,21 @@
 package com.example.cursach_shestopalova;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +32,8 @@ public class MovieActivity extends AppCompatActivity{
     private RecyclerView recyclerView;
     private ScreeningAdapter screeningAdapter;
     private CinemaAdapter сinemaAdapter;
+    private  List<Cinema> allCinemas;
+    List<Cinema> cinemas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,12 @@ public class MovieActivity extends AppCompatActivity{
         setContentView(R.layout.activity_movie);
         overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+        String userRole = sharedPreferences.getString("user_role", ""); // возвращаем -1, если ключ отсутствует
+        ImageButton imageButtonAdmin = findViewById(R.id.admin_button);
+        if (userRole.equals("admin")){
+            imageButtonAdmin.setVisibility(View.VISIBLE);
+        }
         // Получаем id фильма из интента
         Intent intent = getIntent();
         movieId = intent.getIntExtra("movie_id", -1);
@@ -45,15 +58,16 @@ public class MovieActivity extends AppCompatActivity{
 
         ImageView image = findViewById(R.id.imageView);
         TextView title = findViewById(R.id.titleTextView);
+        TextView title1 = findViewById(R.id.toolbar_title);
         TextView genre = findViewById(R.id.genreTextView);
         TextView city = findViewById(R.id.cityTextView);
         TextView description = findViewById(R.id.descriptionTextView);
         image.setImageResource(movie.getImage_id());
         title.setText(movie.getTitle());
+        title1.setText(movie.getTitle());
         genre.setText(movie.getGenr());
         city.setText(movie.getCity());
         description.setText(movie.getDescription());
-
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
         Button button3 = findViewById(R.id.button3);
@@ -90,7 +104,7 @@ public class MovieActivity extends AppCompatActivity{
         List<Screening> screenings = new ArrayList<>();
         screeningAdapter = new ScreeningAdapter(screenings, this);
 
-        List<Cinema> cinemas = new ArrayList<>();
+        cinemas = new ArrayList<>();
         сinemaAdapter = new CinemaAdapter(cinemas, this);
         recyclerView.setAdapter(сinemaAdapter);
 
@@ -136,6 +150,31 @@ public class MovieActivity extends AppCompatActivity{
             }
         });
 
+        imageButtonAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MovieActivity.this);
+                builder.setTitle("Подтверждение удаления");
+                builder.setMessage("Действительно ли вы хотите удалить фильм \"" + movie.getTitle() + "\" из всех кинотеатров?");
+                builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DBHelper dbHelper = new DBHelper(MovieActivity.this);
+                        dbHelper.deleteScreeningsByMovieIdAndTickets(movieId);
+                        dbHelper.deleteMovie(movieId);
+                        dbHelper.close();
+                        Intent intent = new Intent(MovieActivity.this, MainPage.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("Отмена", null);
+                builder.show();
+            }
+        });
+
+
+
+
     }
 
 
@@ -176,10 +215,10 @@ public class MovieActivity extends AppCompatActivity{
     }
     private List<Cinema> getCinemasWithScreeningsByMovieIdAndDate(int movieId, String date) {
         DBHelper dbHelper = new DBHelper(this);
-        List<Cinema> cinemas = new ArrayList<>();
+        cinemas = new ArrayList<>();
 
         // получаем список кинотеатров, которые показывают фильм с id movieId
-        List<Cinema> allCinemas = dbHelper.getCinemasByMovieId(movieId);
+        allCinemas = dbHelper.getCinemasByMovieId(movieId);
         Log.d("CinemasActivity", "Number of cinemas: " + allCinemas.size());
 
         Log.d("CinemasActivity", "All cinemas:");
