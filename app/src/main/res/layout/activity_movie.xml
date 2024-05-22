@@ -48,6 +48,15 @@
             android:layout_marginEnd="16dp"
             android:visibility="gone"
             android:contentDescription="description" />
+        <TextView
+            android:id="@+id/add_screening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавить сеанс"
+            android:visibility="gone"
+            android:clickable="true"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
 
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout

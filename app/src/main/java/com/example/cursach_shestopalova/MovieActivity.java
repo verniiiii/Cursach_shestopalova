@@ -33,7 +33,8 @@ public class MovieActivity extends AppCompatActivity{
     private ScreeningAdapter screeningAdapter;
     private CinemaAdapter сinemaAdapter;
     private  List<Cinema> allCinemas;
-    List<Cinema> cinemas;
+    private List<Cinema> cinemas;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,12 @@ public class MovieActivity extends AppCompatActivity{
         SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
         String userRole = sharedPreferences.getString("user_role", ""); // возвращаем -1, если ключ отсутствует
         ImageButton imageButtonAdmin = findViewById(R.id.admin_button);
+        TextView textAdmin = findViewById(R.id.add_screening);
+        TextView toolbar_title = findViewById(R.id.toolbar_title);
         if (userRole.equals("admin")){
             imageButtonAdmin.setVisibility(View.VISIBLE);
+            textAdmin.setVisibility(View.VISIBLE);
+            toolbar_title.setVisibility(View.GONE);
         }
         // Получаем id фильма из интента
         Intent intent = getIntent();
@@ -172,7 +177,15 @@ public class MovieActivity extends AppCompatActivity{
             }
         });
 
-
+        textAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MovieActivity.this, AddScreening.class);
+                intent.putExtra("date", date);
+                intent.putExtra("movieId", movieId);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -201,7 +214,7 @@ public class MovieActivity extends AppCompatActivity{
         selectedButton = button;
 
         // получаем дату в нужном формате из тега выбранной кнопки
-        String date = (String) button.getTag();
+        date = (String) button.getTag();
 
         // получаем список кинотеатров с сеансами на выбранную дату
         List<Cinema> cinemasWithScreenings = getCinemasWithScreeningsByMovieIdAndDate(movieId, date);

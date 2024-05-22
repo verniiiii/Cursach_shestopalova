@@ -954,6 +954,23 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return count;
     }
+    public List<String> getAllNumberHallsByCinema(int cinemaid) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {"hall_number"};
+        String selection = "cinema_id = ?";
+        String[] selectionArgs = new String[]{String.valueOf(cinemaid)};
+        Cursor cursor = db.query("halls", columns, selection, selectionArgs, null, null, null);
+        List<String> hallsList = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                hallsList.add(String.valueOf(cursor.getInt(0)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return hallsList;
+    }
+
 
 
 
