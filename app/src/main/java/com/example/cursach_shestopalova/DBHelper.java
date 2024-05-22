@@ -25,7 +25,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "cinema_tickets.db";
-    private static final int DATABASE_VERSION = 82;
+    private static final int DATABASE_VERSION = 83;
     private Context mContext; // Контекст приложения
 
     public DBHelper(Context context) {
@@ -943,7 +943,17 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("DBHelper", "Deleted " + deletedTicketsCount + " tickets for screening " + screeningId);
         return deletedTicketsCount;
     }
+    public int deleteScreening(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        String selection = "id=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        int count = db.delete("screenings", selection, selectionArgs);
+        db.close();
+
+        return count;
+    }
 
 
 

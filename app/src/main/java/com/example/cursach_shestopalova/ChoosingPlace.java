@@ -1,4 +1,5 @@
 package com.example.cursach_shestopalova;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.gridlayout.widget.GridLayout;
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -20,6 +22,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -44,6 +47,7 @@ public class ChoosingPlace extends AppCompatActivity {
     private Button continueButton;
 
     private ArrayList<Place> selectedPlaces;
+    String userRole;
 
 
 
@@ -53,8 +57,12 @@ public class ChoosingPlace extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choosing_place);
+        SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", MODE_PRIVATE);
+        userRole = sharedPreferences.getString("user_role", "");
 
         screening = (Screening) getIntent().getSerializableExtra("selectedScreening");
+
+
 
         seatTable = findViewById(R.id.seat_grid);
         toolbarTitle = findViewById(R.id.toolbar_title);
@@ -150,6 +158,31 @@ public class ChoosingPlace extends AppCompatActivity {
     }
     public void updateHallView(Screening selectedScreening) {
 
+        if (userRole.equals("admin")){
+            ImageButton imageButton = findViewById(R.id.admin_button);
+            imageButton.setVisibility(View.VISIBLE);
+            imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ChoosingPlace.this);
+                    builder.setTitle("Подтверждение удаления");
+                    builder.setMessage("Действительно ли вы хотите удалить этот сеанс?");
+                    builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            DBHelper dbHelper = new DBHelper(ChoosingPlace.this);
+                            dbHelper.deleteTicketsByScreeningId(selectedScreening.getId());
+                            dbHelper.deleteScreening(selectedScreening.getId());
+                            dbHelper.close();
+                            Intent intent = new Intent(ChoosingPlace.this, MainPage.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.setNegativeButton("Отмена", null);
+                    builder.show();
+                }
+            });
+        }
         DBHelper databaseHelper = new DBHelper(this);
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         seatTable.removeAllViews(); // очищаем GridLayout
