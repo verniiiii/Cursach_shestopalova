@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +43,7 @@ public class FragmentProfile extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
         int userId = sharedPreferences.getInt("user_id", -1); // возвращаем -1, если ключ отсутствует
+        String userRole = sharedPreferences.getString("user_role", ""); // возвращаем -1, если ключ отсутствует
 
 
         buttonButton2 = view.findViewById(R.id.buttonButton2); // Инициализируем кнопку
@@ -58,8 +62,43 @@ public class FragmentProfile extends Fragment {
 
 
         }
-        else {
+        if (userRole.equals("admin")){
+            EditText editText = view.findViewById(R.id.role);
+            LinearLayout linearLayout = view.findViewById(R.id.lin);
+            editText.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.VISIBLE);
+            Button set_admin = view.findViewById(R.id.set_admin);
+            Button read_role = view.findViewById(R.id.read_role);
+            Button set_user = view.findViewById(R.id.set_user);
 
+            set_admin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String text = editText.getText().toString();
+                    DBHelper dbHelper = new DBHelper(getContext());
+                    dbHelper.setUserRole(text, "admin");
+                    Toast.makeText(getContext(), "Админ успешно установлен", Toast.LENGTH_SHORT).show();
+                }
+            });
+            read_role.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String text = editText.getText().toString();
+                    DBHelper dbHelper = new DBHelper(getContext());
+                    Toast.makeText(getContext(), "Роль: "+dbHelper.getUserRole(text), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+            set_user.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String text = editText.getText().toString();
+                    DBHelper dbHelper = new DBHelper(getContext());
+                    dbHelper.setUserRole(text, "user");
+                    Toast.makeText(getContext(), "User успешно установлен", Toast.LENGTH_SHORT).show();
+
+                }
+            });
         }
 
         textView2 = view.findViewById(R.id.t2); // Добавляем инициализацию кликабельного текста

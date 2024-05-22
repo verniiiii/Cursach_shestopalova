@@ -100,6 +100,26 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return userExists;
     }
+    public void setUserRole(String login, String role) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("role", role);
+
+        String selection = "login = ?";
+        String[] selectionArgs = {login};
+
+        int count = db.update("users", values, selection, selectionArgs);
+
+        db.close();
+
+        if (count > 0) {
+            Log.d("DBHelper", "Successfully updated role to admin for user: " + login);
+        } else {
+            Log.d("DBHelper", "Failed to update role to admin for user: " + login);
+        }
+    }
+
 
     public boolean checkUserAndPassword(String login, String password, SQLiteDatabase db){
         String[] projection = {"password"};
