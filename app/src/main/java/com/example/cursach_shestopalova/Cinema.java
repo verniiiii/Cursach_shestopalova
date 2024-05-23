@@ -9,7 +9,7 @@ public class Cinema implements Serializable {
     private String city;
     private String location;
     private String description;
-    private List<Screening> screenings; // Добавляем список сеансов
+    private List<Screening> screenings;
 
     public Cinema(int id, String name, String city, String location, String description) {
         this.id = id;

@@ -8,23 +8,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class Registration extends AppCompatActivity {
     private SQLiteDatabase db;
-    private TextView usersTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration);
-        DBHelper dbHelper = new DBHelper(this); // Создание экземпляра DBHelper
-//        String te = db.getAllUsersAsString(); //вывод всех пользователей
-//        TextView t = findViewById(R.id.tt);
-//        t.setText(te);
+        DBHelper dbHelper = new DBHelper(this);
+
         db = dbHelper.getWritableDatabase();
-        //dbHelper.onUpgrade(db,1,1);
+
         EditText login_t = findViewById(R.id.login);
         EditText parol_t = findViewById(R.id.parol);
         EditText parol_t2 = findViewById(R.id.parol2);
@@ -54,7 +50,6 @@ public class Registration extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @Override

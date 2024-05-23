@@ -2,7 +2,6 @@ package com.example.cursach_shestopalova;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +31,6 @@ public class CinemaAdapterProst extends RecyclerView.Adapter<CinemaAdapterProst.
     @Override
     public void onBindViewHolder(@NonNull CinemaViewHolder holder, int position) {
         Cinema cinema = cinemas.get(position);
-        Log.d("CinemaAdapter", "Cinema: " + cinema.getName());
         holder.cinema_name.setText(cinema.getName());
         holder.cinema_city.setText(cinema.getCity());
         holder.cinema_location.setText(cinema.getLocation());

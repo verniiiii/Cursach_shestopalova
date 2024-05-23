@@ -6,22 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Base64;
-import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
-import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "cinema_tickets.db";
@@ -112,12 +103,6 @@ public class DBHelper extends SQLiteOpenHelper {
         int count = db.update("users", values, selection, selectionArgs);
 
         db.close();
-
-        if (count > 0) {
-            Log.d("DBHelper", "Successfully updated role to admin for user: " + login);
-        } else {
-            Log.d("DBHelper", "Failed to update role to admin for user: " + login);
-        }
     }
 
 
@@ -143,8 +128,6 @@ public class DBHelper extends SQLiteOpenHelper {
         String hashedPassword = hashPassword(password);
 
         Cursor cursor = db.rawQuery("SELECT id FROM users WHERE login = ? AND password = ?", new String[]{login, hashedPassword});
-        Log.d("Authorization", "SQL query: " + cursor.toString());
-        Log.d("Authorization", "Cursor count: " + cursor.getCount());
 
         int userId = -1;
         if (cursor.moveToFirst()) {
@@ -198,8 +181,6 @@ public class DBHelper extends SQLiteOpenHelper {
             }
             cursor.close();
         }
-
-
         return userRole;
     }
     private void showToast(String message) {
@@ -233,8 +214,6 @@ public class DBHelper extends SQLiteOpenHelper {
         } else {
             usersText.append("No users found!");
         }
-
-
         return usersText.toString();
     }
 
@@ -301,7 +280,6 @@ public class DBHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
             cursor.close();
         }
-
         return faqList;
     }
 
@@ -521,7 +499,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 String time = cursor.getString(timeIndex);
                 int price = cursor.getInt(priceIndex);
 
-
                 screening = new Screening(screeningId, cinema_id, movie_id, hall_id, price, date, time);
             }
             cursor.close();
@@ -641,48 +618,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return movieList;
     }
 
-
-
-
-
-    public List<Screening> getScreeningsByMovieIdAndDate(int movieId, String date) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String[] projection = {
-                "screenings.id",
-                "screenings.cinema_id",
-                "screenings.movie_id",
-                "screenings.hall_id",
-                "screenings.price",
-                "screenings.date",
-                "screenings.time"
-        };
-
-        String selection = "screenings.movie_id = ? AND screenings.date = ?";
-        String[] selectionArgs = {String.valueOf(movieId), date};
-
-        Cursor cursor = db.query("screenings", projection, selection, selectionArgs, null, null, null);
-
-        List<Screening> screenings = new ArrayList<>();
-
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow("screenings.id"));
-                int cinema_id = cursor.getInt(cursor.getColumnIndexOrThrow("screenings.cinema_id"));
-                int movie_id = cursor.getInt(cursor.getColumnIndexOrThrow("screenings.movie_id"));
-                int hall_id = cursor.getInt(cursor.getColumnIndexOrThrow("screenings.hall_id"));
-                int price = cursor.getInt(cursor.getColumnIndexOrThrow("screenings.price"));
-                String time = cursor.getString(cursor.getColumnIndexOrThrow("screenings.time"));
-
-                Screening screening = new Screening(id, cinema_id, movie_id, hall_id, price, date, time);
-                screenings.add(screening);
-            } while (cursor.moveToNext());
-
-            cursor.close();
-        }
-
-        return screenings;
-    }
     public Cinema findCinemaById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -916,7 +851,6 @@ public class DBHelper extends SQLiteOpenHelper {
         String selection = "movie_id = ? AND cinema_id = ?";
         String[] selectionArgs = new String[]{String.valueOf(movieId), String.valueOf(cinemaId)};
         int deletedScreeningsCount = db.delete("screenings", selection, selectionArgs);
-        Log.d("DBHelper", "Deleted " + deletedScreeningsCount + " screenings");
         // удаляем все билеты на сеансы этого фильма в этом кинотеатре
         db.close();
 
@@ -931,7 +865,6 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query("screenings", projection, selection, selectionArgs, null, null, null);
         int deletedTicketsCount = 0;
         // перебираем идентификаторы сеансов и удаляем билеты на них
-        Log.d("DBHelper", "ааааааааааааааааааааа"+cursor.getCount());
 
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -943,11 +876,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
             cursor.close();
         }
-
-        Log.d("DBHelper", "Deleted " + deletedTicketsCount + " tickets");
-        Log.d("DBHelper", "Deleted " + movieId + cinemaId + " tickets");
-
-
     }
 
     public int deleteTicketsByScreeningId(int screeningId) {
@@ -955,7 +883,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String whereClause = "screening_id = ?";
         String[] whereArgs = new String[]{String.valueOf(screeningId)};
         int deletedTicketsCount = db.delete("tickets", whereClause, whereArgs);
-        Log.d("DBHelper", "Deleted " + deletedTicketsCount + " tickets for screening " + screeningId);
+
         return deletedTicketsCount;
     }
     public int deleteScreening(int id) {
@@ -1097,26 +1025,4 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return endTime;
     }
-
-
-
-
-
-
-
-
-
-//    public void deleteAllUsers() { //Удалить всех пользователей из бд
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.delete("users", null, null);
-//        db.close();
-//    }
-
-//    public void resetIdCounter() { //для сброса id
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.execSQL("DELETE FROM sqlite_sequence WHERE name='users'");
-//        db.close();
-//        showToast("ID counter reset successfully!");
-//    }
-
 }

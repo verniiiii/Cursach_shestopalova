@@ -1,9 +1,6 @@
 package com.example.cursach_shestopalova;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.gridlayout.widget.GridLayout;
-import androidx.gridlayout.widget.GridLayout.LayoutParams;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,17 +11,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.widget.ImageButton;;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,16 +27,10 @@ public class ChoosingPlace extends AppCompatActivity {
     private Screening screening;
     private TextView toolbarTitle;
     private TextView cinemaName;
-    private ScaleGestureDetector scaleGestureDetector;
-    private float scaleFactor = 1.0f;
-    private GestureDetector gestureDetector;
-    private float x, y;
-    private int selectedScreeningPosition = -1;
     private GridLayout seatTable;
     private ArrayList<Integer> selectedSeats = new ArrayList<>();
     private Button continueButton;
 
-    private ArrayList<Place> selectedPlaces;
     String userRole;
 
 
@@ -129,22 +113,10 @@ public class ChoosingPlace extends AppCompatActivity {
         TextView sessionDescriptionView = findViewById(R.id.session_description);
         sessionDescriptionView.setText(sessionDescription);
 
-
-
-
         ArrayList<Screening> screenings = (ArrayList<Screening>) getIntent().getSerializableExtra("screenings");
 
-// Находим позицию выбранного сеанса в списке сеансов
-        int selectedScreeningPosition = screenings.indexOf(screening);
-
         ScreeningAdapter_bron adapter = new ScreeningAdapter_bron(screenings, this, screening, this);
-
-
-
-
         RecyclerView sessionsRecyclerView = findViewById(R.id.sessions_recycler_view);
-
-
         sessionsRecyclerView.setAdapter(adapter);
         sessionsRecyclerView.setLayoutManager(new LinearLayoutManager(ChoosingPlace.this, LinearLayoutManager.HORIZONTAL, false));
 
@@ -157,10 +129,6 @@ public class ChoosingPlace extends AppCompatActivity {
 
         TextView totalPriceView = findViewById(R.id.total_price);
         totalPriceView.setText(getString(R.string.total_price, totalPrice));
-
-
-
-
     }
     public void updateHallView(Screening selectedScreening) {
 
@@ -200,7 +168,6 @@ public class ChoosingPlace extends AppCompatActivity {
         String query = "SELECT * FROM rows WHERE hall_id = ?";
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(hallId)});
-        Log.d("Places", "Cursor count: " + cursor.getCount());
 
         if (cursor.moveToFirst()) {
             do {
@@ -213,7 +180,6 @@ public class ChoosingPlace extends AppCompatActivity {
             } while (cursor.moveToNext());
         }
 
-        Log.d("Places", "22: " + rows.size());
 
         // теперь в списке rows содержатся все ряды, относящиеся к залу с идентификатором hallId
 
@@ -225,12 +191,7 @@ public class ChoosingPlace extends AppCompatActivity {
                 "JOIN halls ON rows.hall_id = halls.id " +
                 "WHERE halls.id = ?";
 
-        Log.d("Places", "Query: " + query);
-        Log.d("Places", "Hall ID: " + hallId);
-
         cursor = db.rawQuery(query, new String[]{String.valueOf(hallId)});
-
-        Log.d("Places", "Cursor count: " + cursor.getCount());
 
         if (cursor.moveToFirst()) {
             do {
@@ -241,14 +202,11 @@ public class ChoosingPlace extends AppCompatActivity {
                 Place place = new Place(id, rowNumber, placeNumber);
                 places.add(place);
 
-                Log.d("Places", "Place ID: " + id + ", Place number: " + placeNumber + ", Row number: " + rowNumber);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
         db.close();
-
-        Log.d("Places", "Number of places: " + places.size());
 
         // Получаем максимальное количество мест в ряду и всего в зале
         int maxSeatsInRow = 0;
@@ -412,13 +370,8 @@ public class ChoosingPlace extends AppCompatActivity {
                     intent.putExtra("screening", selectedScreening);
                     startActivity(intent);
                 }
-
-
             }
         });
-
     }
-
-
 }
 

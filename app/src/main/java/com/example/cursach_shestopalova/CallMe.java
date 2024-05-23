@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -29,18 +28,10 @@ public class CallMe extends AppCompatActivity {
 
         DBHelper dbHelper = new DBHelper(this);
         List<Faq> faqs = dbHelper.getAllFaq();
-        Log.d("CallMe", "Number of FAQs: " + faqs.size());
 
-        // Initialize adapter
         faqAdapter = new FaqAdapter(faqs, this);
-
-        // Find RecyclerView in layout
         recyclerView = findViewById(R.id.recyclerView);
-
-        // Set LayoutManager for RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Attach adapter to RecyclerView
         recyclerView.setAdapter(faqAdapter);
     }
 }

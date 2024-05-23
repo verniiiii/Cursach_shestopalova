@@ -2,25 +2,15 @@ package com.example.cursach_shestopalova;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.cursach_shestopalova.Cinema;
-import com.example.cursach_shestopalova.CinemaAdapter;
-import com.example.cursach_shestopalova.DBHelper;
-import com.example.cursach_shestopalova.Movie;
-import com.example.cursach_shestopalova.R;
-import com.example.cursach_shestopalova.Screening;
-import com.example.cursach_shestopalova.ScreeningAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -144,34 +134,8 @@ public class CinemaActivity extends AppCompatActivity {
                 selectButton(button5);
             }
         });
-
-
     }
-//    private int movieId;
-//    private Movie movie;
-//    private Button selectedButton; // выбранная кнопка
-//    private RecyclerView recyclerView;
-//    private ScreeningAdapter screeningAdapter;
-//    private CinemaAdapter сinemaAdapter;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_movie);
-//        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
-//
 
-//
-
-
-
-//
-//
-
-//    }
-//
-//
-//
     private void setButtonDateText(Button button, Calendar calendar) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String dateText = dateFormat.format(calendar.getTime());
@@ -210,8 +174,6 @@ public class CinemaActivity extends AppCompatActivity {
         // получаем список фильмов, которые показывают в кинотеатре с id cinemaId
         List<Movie> allMovies = dbHelper.getMoviesByCinemaId(cinemaId);
 
-
-
         for (Movie movie : allMovies) {
             List<Screening> screenings = dbHelper.getScreeningsByCinemaIdAndMovieIdAndDate(cinemaId, movie.getId(), date);
             if (!screenings.isEmpty()) {
@@ -247,7 +209,4 @@ public class CinemaActivity extends AppCompatActivity {
         button5.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.black));
         button5.setTextColor(ContextCompat.getColor(this, R.color.inactive_icon_color));
     }
-
-
-
 }

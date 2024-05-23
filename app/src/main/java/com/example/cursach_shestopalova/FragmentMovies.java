@@ -1,8 +1,5 @@
 package com.example.cursach_shestopalova;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -10,11 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,11 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,18 +30,15 @@ public class FragmentMovies extends Fragment {
 
     private DBHelper dbHelper;
     private SwitchCompat mySwitch;
-    private SwitchCompat mySwitchAdmin;
     private List<Movie> movieList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movies, container, false);
 
         dbHelper = new DBHelper(getContext());
         movieList = dbHelper.getAllMovies();
-
 
         recyclerView = view.findViewById(R.id.container_movies);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -65,14 +49,9 @@ public class FragmentMovies extends Fragment {
         EditText editText = view.findViewById(R.id.find);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -105,8 +84,6 @@ public class FragmentMovies extends Fragment {
         inflater.inflate(R.menu.action_bar_1, menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_switch);
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
-        String userRole = sharedPreferences.getString("user_role", ""); // возвращаем -1, если ключ отсутствует
 
         mySwitch = (SwitchCompat) menuItem.getActionView();
 

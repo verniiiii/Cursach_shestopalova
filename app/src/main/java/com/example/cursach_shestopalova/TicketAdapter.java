@@ -1,8 +1,6 @@
 package com.example.cursach_shestopalova;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,25 +55,6 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
         holder.data.setText(screening.getDate());
         holder.time.setText(screening.getTime());
         holder.price.setText(String.valueOf(screening.getPrice()));
-
-//        View.OnClickListener onClickListener = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int pos = holder.getAdapterPosition();
-//                if (pos != RecyclerView.NO_POSITION) {
-//                    Ticket selectedTicket = tickets.get(pos);
-//                    Intent intent = new Intent(context, CinemaActivity.class);
-//                    intent.putExtra("cinema_id", selectedTicket.getId());
-//                    context.startActivity(intent);
-//                }
-//            }
-//        };
-//
-//        holder.movie.setOnClickListener(onClickListener);
-//        holder.cinema.setOnClickListener(onClickListener);
-//        holder.hall.setOnClickListener(onClickListener);
-//        holder.row.setOnClickListener(onClickListener);
-//        holder.place.setOnClickListener(onClickListener);
     }
 
     @Override

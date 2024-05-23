@@ -17,6 +17,7 @@ public class Authorization extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.authorization);
+
         DBHelper db = new DBHelper(this); // Создание экземпляра DBHelper
 
         EditText login_t = findViewById(R.id.login);
@@ -41,7 +42,6 @@ public class Authorization extends AppCompatActivity {
                     editor.putBoolean("is_logged_in", true);
                     int userId = db.getUserIdByLoginAndPassword(login, parol, dbb);
                     String u = String.valueOf(userId);
-                    Toast.makeText(Authorization.this, u, Toast.LENGTH_SHORT).show();
                     editor.putInt("user_id", userId); // сохраняем идентификатор пользователя
                     editor.putString("user_role", t); // сохраняем идентификатор пользователя
                     editor.apply();

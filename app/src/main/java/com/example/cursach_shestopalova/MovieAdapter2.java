@@ -64,8 +64,6 @@ public class MovieAdapter2 extends RecyclerView.Adapter<MovieAdapter2.MovieViewH
         public TextView titleTextView;
         public TextView genreTextView;
         public TextView cityTextView;
-
-
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);

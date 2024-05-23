@@ -12,7 +12,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -222,10 +221,6 @@ public class MovieActivity extends AppCompatActivity{
 
         // получаем список кинотеатров с сеансами на выбранную дату
         List<Cinema> cinemasWithScreenings = getCinemasWithScreeningsByMovieIdAndDate(movieId, date);
-        Log.d("MainActivity", "All cinemas:");
-        for (Cinema cinema : cinemasWithScreenings) {
-            Log.d("CinemasActivity", "ID: " + cinema.getId() + ", Name: " + cinema.getName() + ", Screenings: " + cinema.getScreenings());
-        }
 
         // обновляем список кинотеатров на основе полученных данных
         сinemaAdapter.setCinemas(cinemasWithScreenings);
@@ -236,16 +231,9 @@ public class MovieActivity extends AppCompatActivity{
 
         // получаем список кинотеатров, которые показывают фильм с id movieId
         allCinemas = dbHelper.getCinemasByMovieId(movieId);
-        Log.d("CinemasActivity", "Number of cinemas: " + allCinemas.size());
-
-        Log.d("CinemasActivity", "All cinemas:");
-        for (Cinema cinema : allCinemas) {
-            Log.d("CinemasActivity", "ID: " + cinema.getId() + ", Name: " + cinema.getName());
-        }
 
         for (Cinema cinema : allCinemas) {
             List<Screening> screenings = dbHelper.getScreeningsByCinemaIdAndMovieIdAndDate(cinema.getId(), movieId, date);
-            Log.d("CinemaActivity", "Cinema: " + cinema.getName() + ", Screenings: " + screenings.size());
             if (!screenings.isEmpty()) {
                 cinema.setScreenings(screenings);
                 cinemas.add(cinema);
@@ -254,7 +242,6 @@ public class MovieActivity extends AppCompatActivity{
 
         return cinemas;
     }
-
 
     private void resetButtons() {
         Button button1 = findViewById(R.id.button1);

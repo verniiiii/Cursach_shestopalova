@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,26 +16,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentProfile extends Fragment {
 
-    private RecyclerView recyclerView;
-    private TicketAdapter ticketAdapter;
-    private DBHelper dbHelper;
-    private List<Ticket> tickets;
-    private Button buttonButton2; // Добавляем ссылку на кнопку
-    private Button buttonButton1; // Добавляем ссылку на кнопку
-    private TextView textView1; // Добавляем ссылку на кликабельный текст
-    private TextView textView2; // Добавляем ссылку на кликабельный текст
-
-
-
+    private Button buttonButton2;
+    private Button buttonButton1;
+    private TextView textView2;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -89,7 +77,6 @@ public class FragmentProfile extends Fragment {
                     String text = editText.getText().toString();
                     DBHelper dbHelper = new DBHelper(getContext());
                     Toast.makeText(getContext(), "Роль: "+dbHelper.getUserRole(text), Toast.LENGTH_SHORT).show();
-
                 }
             });
             set_user.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +86,6 @@ public class FragmentProfile extends Fragment {
                     DBHelper dbHelper = new DBHelper(getContext());
                     dbHelper.setUserRole(text, "user");
                     Toast.makeText(getContext(), "User успешно установлен", Toast.LENGTH_SHORT).show();
-
                 }
             });
         }
@@ -133,12 +119,8 @@ public class FragmentProfile extends Fragment {
                 // Начинаем новую активность MainPage
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
-
-
             }
         });
-
-
         return view;
     }
 }

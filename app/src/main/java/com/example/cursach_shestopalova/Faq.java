@@ -1,8 +1,5 @@
 package com.example.cursach_shestopalova;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Faq {
     private int id;
     private String question;

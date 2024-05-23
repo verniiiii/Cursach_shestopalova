@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScreeningAdapter_bron extends RecyclerView.Adapter<ScreeningAdapter_bron.ScreeningViewHolder> {
@@ -27,7 +26,6 @@ public class ScreeningAdapter_bron extends RecyclerView.Adapter<ScreeningAdapter
         this.context = context;
         this.selectedScreening = sel;
         this.choosingPlace = choosingPlace; // сохраняем ссылку на активность
-
     }
 
     @NonNull
@@ -118,14 +116,7 @@ public class ScreeningAdapter_bron extends RecyclerView.Adapter<ScreeningAdapter
         this.screenings = screenings;
         notifyDataSetChanged();
     }
-
-
-
     public Screening getSelectedScreening() {
         return selectedScreening;
     }
-
-
-
-
 }

@@ -1,7 +1,6 @@
 package com.example.cursach_shestopalova;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Ticket implements Serializable {
     private int id;

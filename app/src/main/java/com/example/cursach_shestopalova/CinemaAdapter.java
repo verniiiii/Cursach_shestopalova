@@ -5,19 +5,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaViewHolder> {
@@ -45,7 +41,6 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
     @Override
     public void onBindViewHolder(@NonNull CinemaViewHolder holder, int position) {
         Cinema cinema = cinemas.get(position);
-        Log.d("CinemaAdapter", "Cinema: " + cinema.getName() + ", Screenings: " + cinema.getScreenings().size());
         holder.cinema_name.setText(cinema.getName());
         holder.cinema_city.setText(cinema.getCity());
         holder.cinema_location.setText(cinema.getLocation());

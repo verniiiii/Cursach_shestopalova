@@ -1,7 +1,6 @@
 package com.example.cursach_shestopalova;
 
 import android.content.Context;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +31,6 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.FaqViewHolder> {
     public void onBindViewHolder(@NonNull FaqViewHolder holder, int position) {
         Faq faq = faqs.get(position);
 
-
-
         holder.question.setText(faq.getQuestion());
         holder.answer.setText(faq.getAnswer());
 
@@ -52,7 +49,6 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.FaqViewHolder> {
             super(itemView);
             question = itemView.findViewById(R.id.question);
             answer = itemView.findViewById(R.id.answer);
-
         }
     }
 
