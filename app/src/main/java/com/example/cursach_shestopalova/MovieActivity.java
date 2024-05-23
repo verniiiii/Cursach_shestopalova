@@ -44,14 +44,20 @@ public class MovieActivity extends AppCompatActivity{
 
         SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
         String userRole = sharedPreferences.getString("user_role", ""); // возвращаем -1, если ключ отсутствует
-        ImageButton imageButtonAdmin = findViewById(R.id.admin_button);
+        TextView delete_movie = findViewById(R.id.delete_movie);
         TextView textAdmin = findViewById(R.id.add_screening);
-        TextView toolbar_title = findViewById(R.id.toolbar_title);
         if (userRole.equals("admin")){
-            imageButtonAdmin.setVisibility(View.VISIBLE);
+            delete_movie.setVisibility(View.VISIBLE);
             textAdmin.setVisibility(View.VISIBLE);
-            toolbar_title.setVisibility(View.GONE);
         }
+        ImageButton backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         // Получаем id фильма из интента
         Intent intent = getIntent();
         movieId = intent.getIntExtra("movie_id", -1);
@@ -63,13 +69,11 @@ public class MovieActivity extends AppCompatActivity{
 
         ImageView image = findViewById(R.id.imageView);
         TextView title = findViewById(R.id.titleTextView);
-        TextView title1 = findViewById(R.id.toolbar_title);
         TextView genre = findViewById(R.id.genreTextView);
         TextView city = findViewById(R.id.cityTextView);
         TextView description = findViewById(R.id.descriptionTextView);
         image.setImageResource(movie.getImage_id());
         title.setText(movie.getTitle());
-        title1.setText(movie.getTitle());
         genre.setText(movie.getGenr());
         city.setText(movie.getCity());
         description.setText(movie.getDescription());
@@ -155,7 +159,7 @@ public class MovieActivity extends AppCompatActivity{
             }
         });
 
-        imageButtonAdmin.setOnClickListener(new View.OnClickListener() {
+        delete_movie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MovieActivity.this);

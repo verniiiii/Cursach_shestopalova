@@ -60,7 +60,7 @@ public class AddScreening extends AppCompatActivity {
         dateTextView.setText(date);
 
 //        // Заполняем спиннеры списками программно
-        ArrayAdapter<String> cinemaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cinemasNamesList);
+        ArrayAdapter<String> cinemaAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, cinemasNamesList);
         cinemaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cinemaSpinner.setAdapter(cinemaAdapter);
         cinemaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -79,7 +79,7 @@ public class AddScreening extends AppCompatActivity {
                     hallsIndicesList.add(hall.first);
                 }
                 // Обновляем спиннер с номерами залов
-                ArrayAdapter<String> hallAdapter = new ArrayAdapter<>(AddScreening.this, android.R.layout.simple_spinner_item, hallsNamesList);
+                ArrayAdapter<String> hallAdapter = new ArrayAdapter<>(AddScreening.this, R.layout.spinner_item, hallsNamesList);
                 hallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 hallSpinner.setAdapter(hallAdapter);
 
@@ -102,7 +102,7 @@ public class AddScreening extends AppCompatActivity {
                 // Обновляем список времени
                 List<String> timeList = dbHelper.getSessionStartTimesWithEndTimes(selectedHallIndex, date);
                 // Обновляем спиннер с временами
-                ArrayAdapter<String> timeAdapter = new ArrayAdapter<>(AddScreening.this, android.R.layout.simple_spinner_item, timeList);
+                ArrayAdapter<String> timeAdapter = new ArrayAdapter<>(AddScreening.this, R.layout.spinner_item, timeList);
                 timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 screening_spinner.setAdapter(timeAdapter);
 

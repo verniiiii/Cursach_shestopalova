@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
+        android:layout_marginTop="50dp"
         android:src="@drawable/logo" />
 
     <LinearLayout
@@ -17,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_margin="25dp"
+
         android:visibility="visible"
         android:padding="16dp">
 
@@ -42,10 +45,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:background="@color/active_icon_color"
             android:padding="12dp"
-            android:text="Select Session"
+            android:text="Выбрать сеанс"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />

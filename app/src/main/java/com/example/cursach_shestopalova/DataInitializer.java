@@ -248,7 +248,7 @@ public class DataInitializer {
             screeningValues.put("cinema_id", 1);
             screeningValues.put("movie_id", 1);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-22");
+            screeningValues.put("date", "2024-05-23");
             screeningValues.put("time", "12:00");
             screeningValues.put("price", "500");
             db.insert("screenings", null, screeningValues);
@@ -268,7 +268,7 @@ public class DataInitializer {
             screeningValues.put("cinema_id", 2);
             screeningValues.put("movie_id", 1);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-22");
+            screeningValues.put("date", "2024-05-23");
             screeningValues.put("time", "11:00");
             screeningValues.put("price", "500");
             db.insert("screenings", null, screeningValues);
@@ -289,7 +289,7 @@ public class DataInitializer {
             screeningValues.put("cinema_id", 3);
             screeningValues.put("movie_id", 1);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-22");
+            screeningValues.put("date", "2024-05-23");
             screeningValues.put("time", "10:00");
             screeningValues.put("price", "300");
             db.insert("screenings", null, screeningValues);
@@ -312,7 +312,7 @@ public class DataInitializer {
             screeningValues.put("cinema_id", 2);
             screeningValues.put("movie_id", 2);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-23");
+            screeningValues.put("date", "2024-05-24");
             screeningValues.put("time", "11:00");
             screeningValues.put("price", "500");
             db.insert("screenings", null, screeningValues);
@@ -333,7 +333,7 @@ public class DataInitializer {
             screeningValues.put("cinema_id", 3);
             screeningValues.put("movie_id", 3);
             screeningValues.put("hall_id", i);
-            screeningValues.put("date", "2024-05-24");
+            screeningValues.put("date", "2024-05-25");
             screeningValues.put("time", "10:00");
             screeningValues.put("price", "300");
             db.insert("screenings", null, screeningValues);

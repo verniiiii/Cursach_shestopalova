@@ -25,7 +25,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "cinema_tickets.db";
-    private static final int DATABASE_VERSION = 83;
+    private static final int DATABASE_VERSION = 87;
     private Context mContext; // Контекст приложения
 
     public DBHelper(Context context) {

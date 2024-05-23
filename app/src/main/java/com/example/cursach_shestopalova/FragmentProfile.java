@@ -70,6 +70,9 @@ public class FragmentProfile extends Fragment {
             Button set_admin = view.findViewById(R.id.set_admin);
             Button read_role = view.findViewById(R.id.read_role);
             Button set_user = view.findViewById(R.id.set_user);
+            set_admin.setVisibility(View.VISIBLE);
+            read_role.setVisibility(View.VISIBLE);
+            set_user.setVisibility(View.VISIBLE);
 
             set_admin.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -124,6 +127,7 @@ public class FragmentProfile extends Fragment {
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("user_id", -1);
+                editor.putString("user_role", "");
                 editor.apply();
 
                 // Начинаем новую активность MainPage

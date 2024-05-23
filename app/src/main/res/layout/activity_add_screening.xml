@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -50,87 +51,109 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Фильм:"
-                android:textSize="18sp"/>
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:id="@+id/movie_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Название фильма"
-                android:textSize="18sp"/>
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Дата:"
-                android:textSize="18sp"/>
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Дата"
-                android:textSize="18sp"/>
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Кинотеатр:"
-                android:textSize="18sp"/>
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"/>
             <Spinner
                 android:id="@+id/cinema_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
             <Spinner
                 android:id="@+id/screening_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Зал:"
-                android:textSize="18sp"/>
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"/>
 
             <Spinner
                 android:id="@+id/hall_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Время начала:"
-                android:textSize="18sp" />
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp" />
             <EditText
                 android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"/>
-
-
-
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Прайс билета:"
-                android:textSize="18sp"/>
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"/>
 
             <EditText
                 android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:textSize="18sp"/>
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"/>
 
             <Button
                 android:id="@+id/create_screening_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Создать сеанс"
-                android:textSize="18sp"/>
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:background="@color/active_icon_color"
+                android:layout_marginBottom="16dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

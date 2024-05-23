@@ -64,6 +64,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
                     android:text="заказ"
                     android:layout_marginStart="8dp"/>
 
@@ -74,11 +76,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Movie Name"
+                android:textColor="@color/white"
+                android:textSize="16dp"
                 android:padding="12dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/background_rounded" />
+                android:background="@drawable/background_rounded_grey" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -99,6 +103,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
                     android:text="кинотеатр"
                     android:layout_marginStart="8dp"/>
 
@@ -109,11 +115,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Cinema Name"
+                android:textColor="@color/white"
+                android:textSize="16dp"
                 android:padding="12dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/background_rounded" />
+                android:background="@drawable/background_rounded_grey" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -128,12 +136,14 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/i_lupa"
+                    android:src="@drawable/i_data"
                     app:tint="@color/active_icon_color"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
                     android:text="дата"
                     android:layout_marginStart="8dp"/>
 
@@ -145,10 +155,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Дата"
                 android:padding="12dp"
+                android:textColor="@color/white"
+                android:textSize="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/background_rounded" />
+                android:background="@drawable/background_rounded_grey" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,6 +180,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
                     android:text="билеты"
                     android:layout_marginStart="8dp"/>
 
@@ -180,61 +194,77 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/background_rounded"
+                android:background="@drawable/background_rounded_grey"
                 android:padding="12dp">
 
                 <TableRow>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Зал" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Ряд" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Место" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Цена" />
                 </TableRow>
 
                 <TableRow>
-                    <EditText
+                    <TextView
                         android:id="@+id/hall1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Зал" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/row1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Ряд" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/place1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Место" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/money1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Цена" />
                 </TableRow>
@@ -246,61 +276,77 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/background_rounded"
+                android:background="@drawable/background_rounded_grey"
                 android:padding="12dp">
 
                 <TableRow>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Зал" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Ряд" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Место" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Цена" />
                 </TableRow>
 
                 <TableRow>
-                    <EditText
+                    <TextView
                         android:id="@+id/hall2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Зал" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/row2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Ряд" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/place2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Место" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/money2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Цена" />
                 </TableRow>
@@ -312,61 +358,77 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/background_rounded"
+                android:background="@drawable/background_rounded_grey"
                 android:padding="12dp">
 
                 <TableRow>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Зал" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Ряд" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Место" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:text="Цена" />
                 </TableRow>
 
                 <TableRow>
-                    <EditText
+                    <TextView
                         android:id="@+id/hall3"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Зал" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/row3"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Ряд" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/place3"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Место" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/money3"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_height="wrap_content"
                         android:hint="Цена" />
                 </TableRow>
@@ -384,23 +446,29 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/i_lupa"
+                    android:src="@drawable/i_money"
                     app:tint="@color/active_icon_color"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
                     android:text="стоимость заказа"
                     android:layout_marginStart="8dp"/>
                 <TextView
                     android:id="@+id/money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
                     android:text="цена"
                     android:layout_marginStart="20dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
                     android:text="руб"
                     android:layout_marginStart="5dp"/>
 
@@ -411,8 +479,10 @@
                 android:layout_marginRight="100dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14dp"
                 android:text="Забронировать"
-                android:background="@color/active_icon_color"/>
+                android:backgroundTint="@color/active_icon_color"/>
 
 
         </LinearLayout>

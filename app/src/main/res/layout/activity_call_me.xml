@@ -3,33 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".CallMe">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="60dp"
+        android:background="@color/black"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/i_lupa" />
-
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="description"
+            android:src="@drawable/i_lupa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/white" />
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Связаться с нами"
-            android:layout_gravity="center"/>
+            android:text="  Связаться с нами"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
     </androidx.appcompat.widget.Toolbar>
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
         android:text="Мы постоянно развиваемся, и нам важно ваше мнение о работе наших кинотеатров и нашего сервиса."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,22 +52,28 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_rounded"
+        android:background="@drawable/background_rounded_grey"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView">
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        android:layout_margin="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        >
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Если вы хотите задать вопрос, оставить отзыв или сообщить о забытой вещи, напишите нам или позвоните по телефону:" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="+7 (910) 265-08-18" />
 
     </LinearLayout>

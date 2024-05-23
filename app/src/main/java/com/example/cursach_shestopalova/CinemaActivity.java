@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +43,13 @@ public class CinemaActivity extends AppCompatActivity {
         // Получаем id фильма из интента
         Intent intent = getIntent();
         cinemaId = intent.getIntExtra("cinema_id", -1);
+        ImageButton backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         DBHelper dbHelper = new DBHelper(this);
         cinema = dbHelper.findCinemaById(cinemaId);

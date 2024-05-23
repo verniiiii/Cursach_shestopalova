@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -162,7 +163,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
         public TextView cinema_location;
         public TextView cinema_description;
         public RecyclerView sessionsRecyclerView;
-        public ImageButton deleteButton;
+        public Button deleteButton;
 
         public CinemaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -172,6 +173,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaView
             cinema_description = itemView.findViewById(R.id.cinema_description);
             sessionsRecyclerView = itemView.findViewById(R.id.sessions_recycler_view);
             deleteButton = itemView.findViewById(R.id.admin_button);
+
         }
     }
 

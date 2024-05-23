@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:tint="@color/white"
-            android:src="@drawable/i_tickets"
+            android:src="@drawable/i_delete"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="16dp"
             android:layout_marginStart="16dp"
@@ -51,6 +51,7 @@
 
     <TextView
         android:id="@+id/cinema_name"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Название кинотеатра"
@@ -60,6 +61,7 @@
 
     <TextView
         android:id="@+id/session_description"
+        android:textColor="@color/gray2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Описание сеанса"
@@ -79,6 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:alignmentMode="alignBounds"
+
         app:columnCount="10"
         app:rowCount="5">
 
@@ -98,6 +101,7 @@
 
         <TextView
             android:id="@+id/tickets_count"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Количество выбранных билетов: "
@@ -105,6 +109,7 @@
 
         <TextView
             android:id="@+id/total_price"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Сумма: "
@@ -114,6 +119,8 @@
             android:id="@+id/continue_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/active_icon_color"
+            android:textColor="@color/white"
             android:text="Продолжить"
             android:textSize="18sp"
             android:layout_marginStart="16dp" />

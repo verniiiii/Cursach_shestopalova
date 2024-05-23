@@ -62,7 +62,13 @@ public class ChoosingPlace extends AppCompatActivity {
 
         screening = (Screening) getIntent().getSerializableExtra("selectedScreening");
 
-
+        ImageButton backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         seatTable = findViewById(R.id.seat_grid);
         toolbarTitle = findViewById(R.id.toolbar_title);
@@ -319,7 +325,7 @@ public class ChoosingPlace extends AppCompatActivity {
                 seatView.setBackgroundResource(R.drawable.i_profile);
                 seatView.setClickable(false); // Делаем занятые места некликабельными
             } else {
-                seatView.setBackgroundResource(R.drawable.i_films);
+                seatView.setBackgroundResource(R.drawable.i_place);
                 seatView.setClickable(true); // Делаем свободные места кликабельными
 
                 // Добавляем обработчик нажатий для свободных мест
@@ -335,7 +341,7 @@ public class ChoosingPlace extends AppCompatActivity {
                             if (selectedSeatId == seatId) {
                                 // Если место уже выбрано, удаляем его из списка выбранных мест и меняем цвет
                                 selectedSeats.remove(selectedSeatId);
-                                seatView.setBackgroundResource(R.drawable.i_films);
+                                seatView.setBackgroundResource(R.drawable.i_place);
 
                                 return;
                             }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,13 @@ public class Bron extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", MODE_PRIVATE);
         int userId = sharedPreferences.getInt("user_id", -1); // возвращаем -1, если ключ отсутствует
 
+        ImageButton backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         TableLayout tableLayout2 = findViewById(R.id.t2);
         TableLayout tableLayout3 = findViewById(R.id.t3);
         tableLayout2.setVisibility(View.GONE);

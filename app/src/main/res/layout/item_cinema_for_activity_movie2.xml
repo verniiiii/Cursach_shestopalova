@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/background_rounded_grey"
+    android:layout_margin="10dp"
     android:padding="8dp">
 
     <TextView
@@ -17,13 +19,13 @@
         android:id="@+id/cinema_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/gray2"
         android:text="City"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/cinema_location"
-        android:textColor="@color/white"
+        android:textColor="@color/gray2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location"
@@ -31,7 +33,7 @@
 
     <TextView
         android:id="@+id/cinema_description"
-        android:textColor="@color/white"
+        android:textColor="@color/gray2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Description"

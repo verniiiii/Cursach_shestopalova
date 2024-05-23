@@ -45,11 +45,10 @@
         android:id="@+id/buttonButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/active_icon_color"
+        android:background="@drawable/background_rounded"
+        android:backgroundTint="@color/active_icon_color"
         android:layout_marginTop="16dp"
-        android:text="Button"
-        android:drawableLeft="@drawable/i_tickets"
-        android:drawableRight="@drawable/i_lupa"
+        android:text="Войти"
         />
     <TextView
         android:id="@+id/t2"
@@ -59,7 +58,8 @@
         android:clickable="true"
         android:layout_marginTop="16dp"
         android:text="Контакты"
-        android:background="@drawable/background_rounded"
+        android:background="@drawable/background_rounded_grey"
+        android:backgroundTint="@color/white"
         android:textSize="16sp"
         android:padding="16dp"/>
 
@@ -67,6 +67,10 @@
         android:id="@+id/role"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:hint="Введите login пользователя"
+        android:textColorHint="@color/gray"
+        android:backgroundTint="@color/gray"
         android:visibility="gone"/>
 
     <LinearLayout
@@ -78,6 +82,7 @@
 
         <Button
             android:id="@+id/set_admin"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -86,16 +91,18 @@
         <Button
             android:id="@+id/read_role"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Узнать роль"/>
 
         <Button
             android:id="@+id/set_user"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Дать useraa" />
+            android:text="Дать     user" />
 
     </LinearLayout>
 
@@ -106,11 +113,9 @@
         android:id="@+id/buttonButton2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
+        android:background="@drawable/background_rounded_grey"
         android:layout_marginTop="16dp"
-        android:text="Button"
-        android:drawableLeft="@drawable/i_tickets"
-        android:drawableRight="@drawable/i_lupa"
+        android:text="Выйти"
         android:visibility="gone"
         />
 </LinearLayout>

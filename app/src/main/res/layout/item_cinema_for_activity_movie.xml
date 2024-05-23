@@ -5,19 +5,20 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <ImageButton
+
+    <Button
         android:id="@+id/admin_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/i_tickets"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:visibility="gone"
-        android:contentDescription="description" />
+        android:clickable="true"
+        android:text="Удалить из этого кинотеатра"
+        android:background="@drawable/background_rounded_grey"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/cinema_name"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
@@ -25,18 +26,21 @@
 
     <TextView
         android:id="@+id/cinema_city"
+        android:textColor="@color/gray2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/cinema_location"
+        android:textColor="@color/gray2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/cinema_description"
+        android:textColor="@color/gray2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -44,6 +48,7 @@
 
     <TextView
         android:layout_width="wrap_content"
+        android:textColor="@color/gray2"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Доступные сеансы:"
